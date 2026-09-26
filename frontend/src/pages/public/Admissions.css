@@ -1,0 +1,393 @@
+/* =========================================================
+   ADMISSIONS PAGE
+========================================================= */
+
+.public-admissions {
+    background: #ffffff;
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   COMMON CONTAINER
+========================================================= */
+
+.public-admissions .container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.admissions-page-hero {
+    padding: 60px 0;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.admissions-page-hero .section-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.admissions-page-hero h1 {
+    margin: 0 0 12px;
+    color: #0f172a;
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 750;
+}
+
+.admissions-page-hero p {
+    max-width: 700px;
+    margin: 0;
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SECTION COMMON
+========================================================= */
+
+.admission-process-section,
+.admission-requirements-section {
+    padding: 60px 0;
+}
+
+.section-heading {
+    max-width: 700px;
+    margin-bottom: 32px;
+}
+
+.section-heading .section-label,
+.admission-requirements-section .section-label {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.section-heading h2,
+.admission-requirements-section h2 {
+    margin: 0 0 12px;
+    color: #0f172a;
+    font-size: 28px;
+    line-height: 1.25;
+}
+
+.admission-requirements-section h2 {
+    margin-top: 0;
+}
+
+.admission-requirements-section p {
+    max-width: 560px;
+    margin: 0;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ADMISSION STEPS
+========================================================= */
+
+.admission-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.admission-step {
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.admission-step:hover {
+    transform: translateY(-3px);
+    border-color: #bfdbfe;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.09);
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+    margin-bottom: 18px;
+
+    border-radius: 50%;
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.admission-step h3 {
+    margin: 0 0 8px;
+    color: #0f172a;
+    font-size: 19px;
+}
+
+.admission-step p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   REQUIREMENTS
+========================================================= */
+
+.admission-requirements-section {
+    background: #f8fafc;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+
+/* =========================================================
+   DOCUMENT LIST
+========================================================= */
+
+.document-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.document-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 16px;
+
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.document-item span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 26px;
+    height: 26px;
+
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.document-item p {
+    margin: 0;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CONTACT / CTA
+========================================================= */
+
+.admission-contact-section {
+    padding: 45px 0;
+}
+
+.admission-contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    padding: 32px 36px;
+
+    border-radius: 16px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+}
+
+.admission-contact h2 {
+    margin: 0 0 8px;
+    color: #0f172a;
+    font-size: 24px;
+}
+
+.admission-contact p {
+    max-width: 650px;
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.admission-contact .primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    padding: 11px 20px;
+
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: background 0.2s ease,
+                transform 0.2s ease;
+}
+
+.admission-contact .primary-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.public-admissions > .container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.public-admissions > .container p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .admission-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .admission-contact {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .admissions-page-hero {
+        padding: 45px 0;
+    }
+
+    .admissions-page-hero h1 {
+        font-size: 30px;
+    }
+
+    .admissions-page-hero p {
+        font-size: 14px;
+    }
+
+    .admission-process-section,
+    .admission-requirements-section {
+        padding: 45px 0;
+    }
+
+    .section-heading h2,
+    .admission-requirements-section h2 {
+        font-size: 24px;
+    }
+
+    .admission-steps {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .admission-step {
+        padding: 20px;
+    }
+
+    .two-column {
+        gap: 28px;
+    }
+
+    .admission-contact-section {
+        padding: 30px 0;
+    }
+
+    .admission-contact {
+        padding: 25px 22px;
+        border-radius: 12px;
+    }
+
+    .admission-contact h2 {
+        font-size: 21px;
+    }
+
+    .admission-contact .primary-btn {
+        width: 100%;
+    }
+
+}

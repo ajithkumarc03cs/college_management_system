@@ -1,0 +1,263 @@
+/* =========================================================
+   PUBLIC GALLERY
+========================================================= */
+
+.public-gallery {
+    background: #ffffff;
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.public-gallery .container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.gallery-page-hero {
+    padding: 60px 0;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.gallery-page-hero .section-label {
+    display: inline-block;
+    margin-bottom: 10px;
+
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.gallery-page-hero h1 {
+    margin: 0 0 12px;
+
+    color: #0f172a;
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 750;
+}
+
+.gallery-page-hero p {
+    max-width: 650px;
+    margin: 0;
+
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   GALLERY SECTION
+========================================================= */
+
+.gallery-list-section {
+    padding: 60px 0 70px;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.gallery-list-section .section-heading {
+    margin-bottom: 32px;
+}
+
+.gallery-list-section .section-label {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.gallery-list-section h2 {
+    margin: 0;
+
+    color: #0f172a;
+    font-size: 28px;
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   GALLERY GRID
+========================================================= */
+
+.public-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+
+/* =========================================================
+   GALLERY CARD
+========================================================= */
+
+.public-gallery-card {
+    position: relative;
+
+    overflow: hidden;
+
+    height: 210px;
+
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    box-shadow: 0 5px 16px rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.public-gallery-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #bfdbfe;
+
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.public-gallery-card img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.3s ease;
+}
+
+.public-gallery-card:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.gallery-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #dbeafe
+    );
+
+    color: #1d4ed8;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .public-gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .public-gallery-card {
+        height: 200px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .public-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-page-hero {
+        padding: 50px 0;
+    }
+
+    .gallery-page-hero h1 {
+        font-size: 32px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .gallery-page-hero {
+        padding: 42px 0;
+    }
+
+    .gallery-page-hero h1 {
+        font-size: 28px;
+    }
+
+    .gallery-page-hero p {
+        font-size: 14px;
+    }
+
+    .gallery-list-section {
+        padding: 45px 0 55px;
+    }
+
+    .gallery-list-section h2 {
+        font-size: 24px;
+    }
+
+    .public-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .public-gallery-card {
+        height: 220px;
+        border-radius: 10px;
+    }
+
+}

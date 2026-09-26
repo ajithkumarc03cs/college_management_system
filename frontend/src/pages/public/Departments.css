@@ -1,0 +1,678 @@
+/* =========================================================
+   PUBLIC DEPARTMENTS PAGE
+========================================================= */
+
+.departments-page {
+    width: 100%;
+    overflow: hidden;
+
+    background: #ffffff;
+    color: #0f172a;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.departments-container {
+    width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.departments-hero {
+    position: relative;
+
+    padding: 60px 16px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff 0%,
+            #ffffff 55%,
+            #f8fafc 100%
+        );
+
+    border-bottom: 1px solid #e2e8f0;
+
+    overflow: hidden;
+}
+
+.departments-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    top: -170px;
+    left: -110px;
+
+    border-radius: 50%;
+
+    background: rgba(37, 99, 235, 0.06);
+}
+
+.departments-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    right: -120px;
+    bottom: -160px;
+
+    border-radius: 50%;
+
+    background: rgba(59, 130, 246, 0.07);
+}
+
+
+/* =========================================================
+   HERO LABEL
+========================================================= */
+
+.departments-hero > span {
+    position: relative;
+    z-index: 1;
+
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: #2563eb;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.departments-hero h1 {
+    position: relative;
+    z-index: 1;
+
+    margin: 0 0 12px;
+
+    color: #0f172a;
+
+    font-size: clamp(32px, 5vw, 42px);
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.8px;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.departments-hero > p {
+    position: relative;
+    z-index: 1;
+
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #64748b;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   DEPARTMENTS SECTION
+========================================================= */
+
+.departments-section {
+    padding: 55px 16px 70px;
+
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.departments-heading {
+    max-width: 720px;
+
+    margin: 0 auto 35px;
+
+    text-align: center;
+}
+
+
+/* LABEL */
+
+.departments-heading > span {
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: #2563eb;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+
+/* TITLE */
+
+.departments-heading h2 {
+    margin: 0 0 12px;
+
+    color: #0f172a;
+
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+
+/* DESCRIPTION */
+
+.departments-heading p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #64748b;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   DEPARTMENTS GRID
+========================================================= */
+
+.departments-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   DEPARTMENT CARD
+========================================================= */
+
+.department-card {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    padding: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 15px rgba(15, 23, 42, 0.04);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.department-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 14px 30px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   DEPARTMENT ICON
+========================================================= */
+
+.department-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 54px;
+    height: 54px;
+
+    margin-bottom: 18px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dbeafe,
+            #eff6ff
+        );
+
+    color: #2563eb;
+
+    font-size: 25px;
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(37, 99, 235, 0.05);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.department-card:hover .department-icon {
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #bfdbfe,
+            #dbeafe
+        );
+}
+
+
+/* =========================================================
+   DEPARTMENT TITLE
+========================================================= */
+
+.department-card h3 {
+    margin: 0 0 9px;
+
+    color: #0f172a;
+
+    font-size: 19px;
+    font-weight: 800;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   DEPARTMENT DESCRIPTION
+========================================================= */
+
+.department-card > p {
+    margin: 0 0 18px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   DEPARTMENT LINK
+========================================================= */
+
+.department-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    align-self: flex-start;
+
+    margin-top: auto;
+
+    color: #2563eb;
+
+    font-size: 13px;
+    font-weight: 750;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        gap 0.2s ease;
+}
+
+.department-link:hover {
+    color: #1d4ed8;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.departments-cta {
+    padding: 0 16px 55px;
+
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   CTA CONTENT
+========================================================= */
+
+.departments-cta-content {
+    position: relative;
+
+    width: min(1100px, 100%);
+
+    margin: 0 auto;
+
+    padding: 42px;
+
+    text-align: center;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172554,
+            #1e3a8a 50%,
+            #2563eb
+        );
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CTA DECORATION
+========================================================= */
+
+.departments-cta-content::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    top: -180px;
+    left: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.departments-cta-content::after {
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    right: -110px;
+    bottom: -170px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+/* =========================================================
+   CTA TITLE
+========================================================= */
+
+.departments-cta-content h2 {
+    position: relative;
+    z-index: 1;
+
+    margin: 0 0 10px;
+
+    color: #ffffff;
+
+    font-size: clamp(25px, 4vw, 34px);
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   CTA DESCRIPTION
+========================================================= */
+
+.departments-cta-content p {
+    position: relative;
+    z-index: 1;
+
+    max-width: 650px;
+
+    margin: 0 auto 22px;
+
+    color: #dbeafe;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA BUTTON
+========================================================= */
+
+.departments-cta-button {
+    position: relative;
+    z-index: 1;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 22px;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #1d4ed8;
+
+    font-size: 13px;
+    font-weight: 750;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 7px 20px rgba(15, 23, 42, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.departments-cta-button:hover {
+    transform: translateY(-2px);
+
+    background: #f8fafc;
+
+    box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.20);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .departments-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+    .department-card {
+        padding: 22px;
+    }
+
+    .departments-cta-content {
+        padding: 36px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .departments-container {
+        width: min(100% - 24px, 1100px);
+    }
+
+    .departments-hero {
+        padding: 50px 14px;
+    }
+
+    .departments-hero h1 {
+        font-size: 32px;
+    }
+
+    .departments-hero > p {
+        font-size: 14px;
+    }
+
+    .departments-section {
+        padding: 45px 14px 55px;
+    }
+
+    .departments-heading {
+        margin-bottom: 28px;
+    }
+
+    .departments-heading h2 {
+        font-size: 27px;
+    }
+
+    .departments-heading p {
+        font-size: 14px;
+    }
+
+    .departments-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .department-card {
+        padding: 20px;
+    }
+
+    .department-icon {
+        width: 50px;
+        height: 50px;
+
+        margin-bottom: 15px;
+
+        font-size: 23px;
+    }
+
+    .department-card h3 {
+        font-size: 18px;
+    }
+
+    .department-card > p {
+        font-size: 13px;
+    }
+
+    .departments-cta {
+        padding: 0 12px 40px;
+    }
+
+    .departments-cta-content {
+        padding: 32px 22px;
+    }
+
+    .departments-cta-content h2 {
+        font-size: 27px;
+    }
+
+    .departments-cta-content p {
+        font-size: 14px;
+    }
+
+    .departments-cta-button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .departments-hero {
+        padding: 45px 12px;
+    }
+
+    .departments-hero h1 {
+        font-size: 29px;
+    }
+
+    .departments-section {
+        padding: 40px 12px 50px;
+    }
+
+    .department-card {
+        padding: 18px;
+    }
+
+    .departments-cta {
+        padding: 0 10px 35px;
+    }
+
+    .departments-cta-content {
+        padding: 28px 18px;
+    }
+
+    .departments-cta-content h2 {
+        font-size: 25px;
+    }
+}

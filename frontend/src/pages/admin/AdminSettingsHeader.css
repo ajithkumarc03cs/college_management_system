@@ -1,0 +1,408 @@
+/* =========================================================
+   WEBSITE HEADER MANAGER
+========================================================= */
+
+.website-header-manager {
+    width: 100%;
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+.website-header-manager-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.website-header-manager-top h3 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.website-header-manager-top p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ADD BUTTON
+========================================================= */
+
+.website-add-menu-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    background: #2563eb;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.website-add-menu-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.website-menu-form {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    background: #f8fafc;
+}
+
+.website-menu-form-header {
+    margin-bottom: 20px;
+}
+
+.website-menu-form-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #0f172a;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.website-form-group {
+    margin-bottom: 16px;
+}
+
+.website-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.website-form-group input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: white;
+    font-size: 14px;
+    outline: none;
+}
+
+.website-form-group input:focus {
+    border-color: #2563eb;
+}
+
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.website-form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #334155;
+}
+
+.website-form-checkbox input {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.website-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.website-save-btn {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 18px;
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.website-cancel-btn {
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    padding: 10px 18px;
+    background: white;
+    color: #334155;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MENU LIST
+========================================================= */
+
+.website-menu-list {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+}
+
+
+/* =========================================================
+   MENU ITEM
+========================================================= */
+
+.website-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.website-menu-item:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   MENU INFO
+========================================================= */
+
+.website-menu-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.website-menu-order {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.website-menu-info h4 {
+    margin: 0 0 5px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.website-menu-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.website-menu-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+.website-menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.website-menu-toggle input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.website-toggle-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    border-radius: 999px;
+    background: #cbd5e1;
+    transition: 0.2s;
+}
+
+.website-toggle-slider::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 3px;
+    left: 3px;
+    border-radius: 50%;
+    background: white;
+    transition: 0.2s;
+}
+
+.website-menu-toggle input:checked + .website-toggle-slider {
+    background: #2563eb;
+}
+
+.website-menu-toggle input:checked + .website-toggle-slider::after {
+    transform: translateX(20px);
+}
+
+.website-toggle-label {
+    min-width: 65px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+}
+
+
+/* =========================================================
+   EDIT
+========================================================= */
+
+.website-edit-btn {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 7px 12px;
+    background: white;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.website-edit-btn:hover {
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+.website-delete-btn {
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 7px 12px;
+    background: white;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.website-delete-btn:hover {
+    background: #fef2f2;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.website-menu-empty {
+    padding: 40px;
+    text-align: center;
+}
+
+.website-menu-empty p {
+    margin: 0 0 15px;
+    color: #64748b;
+}
+
+.website-menu-empty button {
+    border: none;
+    border-radius: 7px;
+    padding: 9px 16px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.website-header-loading {
+    padding: 40px;
+    text-align: center;
+    color: #64748b;
+}
+
+.website-header-error {
+    padding: 40px;
+    text-align: center;
+    color: #dc2626;
+}
+
+.website-header-error button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .website-header-manager-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .website-menu-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .website-menu-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+}

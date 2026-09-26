@@ -1,0 +1,316 @@
+/* =========================================================
+   PUBLIC EVENTS
+========================================================= */
+
+.public-events {
+    background: #ffffff;
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.public-events .container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.events-page-hero {
+    padding: 60px 0;
+
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.events-page-hero .section-label {
+    display: inline-block;
+    margin-bottom: 10px;
+
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.events-page-hero h1 {
+    margin: 0 0 12px;
+
+    color: #0f172a;
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 750;
+}
+
+.events-page-hero p {
+    max-width: 680px;
+    margin: 0;
+
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   EVENTS SECTION
+========================================================= */
+
+.events-list-section {
+    padding: 60px 0 70px;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.events-list-section .section-heading {
+    margin-bottom: 32px;
+}
+
+.events-list-section .section-label {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.events-list-section h2 {
+    margin: 0;
+
+    color: #0f172a;
+    font-size: 28px;
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   EVENT GRID
+========================================================= */
+
+.public-event-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+
+/* =========================================================
+   EVENT CARD
+========================================================= */
+
+.public-event-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    box-shadow: 0 5px 16px rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.public-event-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #bfdbfe;
+
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+}
+
+
+/* =========================================================
+   EVENT IMAGE
+========================================================= */
+
+.event-page-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 210px;
+
+    overflow: hidden;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.event-page-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.3s ease;
+}
+
+.public-event-card:hover .event-page-image img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   EVENT CONTENT
+========================================================= */
+
+.public-event-content {
+    padding: 20px;
+}
+
+.public-event-content > span {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #2563eb;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.public-event-content h3 {
+    margin: 0 0 10px;
+
+    color: #0f172a;
+
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.public-event-content p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+    line-height: 1.65;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.public-event-grid > p {
+    grid-column: 1 / -1;
+
+    padding: 40px 20px;
+
+    margin: 0;
+
+    background: #f8fafc;
+
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+
+    color: #64748b;
+
+    text-align: center;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.public-events > .container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.public-events > .container p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .public-event-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .event-page-image {
+        height: 200px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .events-page-hero {
+        padding: 45px 0;
+    }
+
+    .events-page-hero h1 {
+        font-size: 30px;
+    }
+
+    .events-page-hero p {
+        font-size: 14px;
+    }
+
+    .events-list-section {
+        padding: 45px 0 55px;
+    }
+
+    .events-list-section h2 {
+        font-size: 24px;
+    }
+
+    .public-event-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .event-page-image {
+        height: 220px;
+    }
+
+    .public-event-content {
+        padding: 18px;
+    }
+
+}

@@ -1,0 +1,918 @@
+/* ============================================================
+   ADMIN COURSES PAGE
+   ============================================================ */
+
+.admin-courses-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.admin-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 24px;
+}
+
+.admin-page-header h1 {
+    margin: 0 0 6px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+.admin-page-header p {
+    margin: 0;
+
+    font-size: 14px;
+    color: #6b7280;
+}
+
+
+/* ============================================================
+   SUCCESS / ERROR
+   ============================================================ */
+
+.settings-success,
+.settings-error {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 13px 16px;
+    margin-bottom: 20px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.settings-success {
+    background: #ecfdf3;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+}
+
+.settings-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+
+/* ============================================================
+   MAIN CARD
+   ============================================================ */
+
+.admin-settings-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    margin-bottom: 24px;
+
+    padding: 26px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
+
+.settings-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #eef0f3;
+
+    margin-bottom: 24px;
+}
+
+.settings-card-header h2 {
+    margin: 0 0 6px;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+.settings-card-header p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: #6b7280;
+}
+
+
+/* ============================================================
+   SECTION
+   ============================================================ */
+
+.settings-section {
+    margin-bottom: 28px;
+}
+
+.settings-section:last-child {
+    margin-bottom: 0;
+}
+
+.settings-section h3 {
+    margin: 0 0 18px;
+
+    font-size: 16px;
+    font-weight: 650;
+
+    color: #1f2937;
+}
+
+
+/* ============================================================
+   FORM GRID
+   ============================================================ */
+
+.settings-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* ============================================================
+   FORM FIELD
+   ============================================================ */
+
+.settings-field {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.settings-field-full {
+    grid-column: 1 / -1;
+}
+
+.settings-field label {
+    margin-bottom: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+.settings-field input[type="text"],
+.settings-field input[type="number"],
+.settings-field input[type="file"],
+.settings-field textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d7dce3;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #1f2937;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* ============================================================
+   TEXT INPUT
+   ============================================================ */
+
+.settings-field input[type="text"],
+.settings-field input[type="number"] {
+    height: 44px;
+
+    padding: 0 13px;
+}
+
+
+/* ============================================================
+   TEXTAREA
+   ============================================================ */
+
+.settings-field textarea {
+    padding: 12px 13px;
+
+    min-height: 110px;
+
+    line-height: 1.6;
+
+    resize: vertical;
+}
+
+
+/* ============================================================
+   FILE INPUT
+   ============================================================ */
+
+.settings-field input[type="file"] {
+    min-height: 44px;
+
+    padding: 9px 11px;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   INPUT FOCUS
+   ============================================================ */
+
+.settings-field input[type="text"]:focus,
+.settings-field input[type="number"]:focus,
+.settings-field input[type="file"]:focus,
+.settings-field textarea:focus {
+    border-color: #4f46e5;
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.10);
+}
+
+
+/* ============================================================
+   PLACEHOLDER
+   ============================================================ */
+
+.settings-field input::placeholder,
+.settings-field textarea::placeholder {
+    color: #9ca3af;
+}
+
+
+/* ============================================================
+   CHECKBOX
+   ============================================================ */
+
+.settings-checkbox-field {
+    justify-content: flex-end;
+}
+
+.settings-checkbox-field > label {
+    display: inline-flex;
+
+    flex-direction: row;
+    align-items: center;
+
+    gap: 9px;
+
+    margin: 0;
+
+    min-height: 44px;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.settings-checkbox-field input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+
+    margin: 0;
+
+    cursor: pointer;
+
+    accent-color: #4f46e5;
+}
+
+.settings-checkbox-field span {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+/* ============================================================
+   FORM ACTIONS
+   ============================================================ */
+
+.settings-form-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eef0f3;
+}
+
+
+/* ============================================================
+   SAVE BUTTON
+   ============================================================ */
+
+.settings-save-btn {
+    min-height: 42px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #4f46e5;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+.settings-save-btn:hover {
+    background: #4338ca;
+
+    box-shadow:
+        0 4px 12px rgba(79, 70, 229, 0.20);
+}
+
+.settings-save-btn:active {
+    transform: translateY(1px);
+}
+
+.settings-save-btn:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    box-shadow: none;
+}
+
+
+/* ============================================================
+   CANCEL BUTTON
+   ============================================================ */
+
+.settings-cancel-btn {
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #374151;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.settings-cancel-btn:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.settings-cancel-btn:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   LIST HEADER
+   ============================================================ */
+
+.settings-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.settings-list-header h3 {
+    margin: 0 0 4px;
+}
+
+.settings-list-header p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #6b7280;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.settings-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 150px;
+
+    padding: 24px;
+
+    border: 1px dashed #d1d5db;
+    border-radius: 10px;
+
+    background: #fafafa;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   COURSE LIST
+   ============================================================ */
+
+.admin-course-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* ============================================================
+   COURSE ITEM
+   ============================================================ */
+
+.admin-course-item {
+    display: flex;
+
+    gap: 18px;
+
+    padding: 18px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.admin-course-item:hover {
+    border-color: #cfd4dc;
+
+    box-shadow:
+        0 5px 16px rgba(15, 23, 42, 0.06);
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   COURSE IMAGE
+   ============================================================ */
+
+.admin-course-image {
+    width: 150px;
+    min-width: 150px;
+    height: 110px;
+
+    overflow: hidden;
+
+    border-radius: 9px;
+
+    background: #f3f4f6;
+}
+
+.admin-course-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.admin-course-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 35px;
+
+    background: #f3f4f6;
+}
+
+
+/* ============================================================
+   COURSE CONTENT
+   ============================================================ */
+
+.admin-course-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* ============================================================
+   COURSE TOP
+   ============================================================ */
+
+.admin-course-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 16px;
+}
+
+.admin-course-type {
+    display: inline-block;
+
+    margin-bottom: 5px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    color: #4f46e5;
+}
+
+.admin-course-top h4 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.course-status {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 28px;
+
+    padding: 0 10px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.course-status.active {
+    background: #ecfdf3;
+    color: #15803d;
+}
+
+.course-status.inactive {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+
+/* ============================================================
+   COURSE META
+   ============================================================ */
+
+.admin-course-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-top: 10px;
+}
+
+.admin-course-meta span {
+    font-size: 12px;
+
+    color: #6b7280;
+}
+
+
+/* ============================================================
+   COURSE DESCRIPTION
+   ============================================================ */
+
+.admin-course-description {
+    margin: 11px 0 0;
+
+    max-width: 900px;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: #6b7280;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   COURSE ACTIONS
+   ============================================================ */
+
+.admin-course-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 14px;
+}
+
+
+/* ============================================================
+   EDIT BUTTON
+   ============================================================ */
+
+.settings-edit-btn {
+    min-height: 35px;
+
+    padding: 0 14px;
+
+    border: 1px solid #c7d2fe;
+    border-radius: 7px;
+
+    background: #eef2ff;
+    color: #4338ca;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.settings-edit-btn:hover {
+    background: #e0e7ff;
+
+    border-color: #a5b4fc;
+}
+
+
+/* ============================================================
+   DELETE BUTTON
+   ============================================================ */
+
+.settings-delete-btn {
+    min-height: 35px;
+
+    padding: 0 14px;
+
+    border: 1px solid #fecaca;
+    border-radius: 7px;
+
+    background: #fef2f2;
+    color: #dc2626;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.settings-delete-btn:hover {
+    background: #fee2e2;
+
+    border-color: #fca5a5;
+}
+
+
+/* ============================================================
+   LOADING
+   ============================================================ */
+
+.admin-courses-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 250px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   RESPONSIVE - TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .admin-courses-page {
+        padding: 20px;
+    }
+
+    .settings-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-field-full {
+        grid-column: auto;
+    }
+
+    .admin-course-item {
+        gap: 14px;
+    }
+
+    .admin-course-image {
+        width: 125px;
+        min-width: 125px;
+        height: 95px;
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - MOBILE
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+    .admin-courses-page {
+        padding: 14px;
+    }
+
+    .admin-page-header {
+        margin-bottom: 18px;
+    }
+
+    .admin-page-header h1 {
+        font-size: 24px;
+    }
+
+    .admin-settings-card {
+        padding: 18px;
+        border-radius: 11px;
+    }
+
+    .settings-card-header h2 {
+        font-size: 18px;
+    }
+
+    .settings-form-actions {
+        flex-wrap: wrap;
+    }
+
+    .settings-save-btn,
+    .settings-cancel-btn {
+        min-width: 120px;
+    }
+
+    .admin-course-item {
+        flex-direction: column;
+    }
+
+    .admin-course-image {
+        width: 100%;
+        height: 170px;
+    }
+
+    .admin-course-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .course-status {
+        align-self: flex-start;
+    }
+
+    .admin-course-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .admin-course-actions {
+        width: 100%;
+    }
+
+    .settings-edit-btn,
+    .settings-delete-btn {
+        flex: 1;
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 400px) {
+
+    .admin-courses-page {
+        padding: 10px;
+    }
+
+    .admin-settings-card {
+        padding: 14px;
+    }
+
+    .settings-form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .settings-save-btn,
+    .settings-cancel-btn {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,125 @@
+/* =========================================================
+   FRONTEND DATA
+========================================================= */
+
+.frontend-data-page {
+    width: 100%;
+}
+
+.frontend-data-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.frontend-data-sidebar {
+    width: 230px;
+    flex-shrink: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.frontend-data-sidebar-header {
+    padding: 18px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.frontend-data-sidebar-header h3 {
+    margin: 0;
+    font-size: 15px;
+    color: #111827;
+}
+
+.frontend-data-menu {
+    padding: 8px;
+}
+
+.frontend-data-menu-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: transparent;
+    padding: 11px 12px;
+    margin-bottom: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    color: #4b5563;
+    transition: 0.2s;
+}
+
+.frontend-data-menu-item:hover {
+    background: #f3f4f6;
+}
+
+.frontend-data-menu-item.active {
+    background: #111827;
+    color: #ffffff;
+}
+
+.frontend-data-icon {
+    width: 22px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.frontend-data-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.frontend-data-placeholder {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.frontend-data-placeholder-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.frontend-data-placeholder h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #111827;
+}
+
+.frontend-data-placeholder p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+
+    .frontend-data-layout {
+        flex-direction: column;
+    }
+
+    .frontend-data-sidebar {
+        width: 100%;
+    }
+
+    .frontend-data-menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .frontend-data-menu {
+        grid-template-columns: 1fr;
+    }
+}

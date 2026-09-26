@@ -1,0 +1,152 @@
+/* =========================================================
+   PLACEMENTS PAGE
+========================================================= */
+
+.placements-page {
+    width: 100%;
+}
+
+.placements-hero {
+    padding: 90px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+}
+
+.placements-hero h1 {
+    margin: 0 0 16px;
+    font-size: 48px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.placements-hero p {
+    max-width: 720px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #64748b;
+}
+
+.placements-intro {
+    padding: 80px 20px 50px;
+    background: #ffffff;
+}
+
+.placements-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.placements-heading {
+    max-width: 750px;
+    margin: auto;
+    text-align: center;
+}
+
+.placements-heading span {
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.placements-heading h2 {
+    margin: 10px 0 15px;
+    font-size: 36px;
+    color: #0f172a;
+}
+
+.placements-heading p {
+    line-height: 1.7;
+    color: #64748b;
+}
+
+.placement-features {
+    padding: 30px 20px 80px;
+    background: #ffffff;
+}
+
+.placement-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.placement-card {
+    padding: 30px 22px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #f8fafc;
+    transition: 0.3s ease;
+}
+
+.placement-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+}
+
+.placement-icon {
+    font-size: 42px;
+    margin-bottom: 18px;
+}
+
+.placement-card h3 {
+    margin: 0 0 10px;
+    color: #0f172a;
+}
+
+.placement-card p {
+    margin: 0;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+.placements-cta {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+.placements-cta h2 {
+    margin: 0 0 15px;
+    font-size: 38px;
+    color: #ffffff;
+}
+
+.placements-cta p {
+    max-width: 700px;
+    margin: 0 auto 28px;
+    color: #dbeafe;
+    line-height: 1.7;
+}
+
+.placements-cta-button {
+    display: inline-block;
+    padding: 13px 28px;
+    background: #ffffff;
+    color: #1d4ed8;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+@media (max-width: 950px) {
+    .placement-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .placements-hero h1 {
+        font-size: 36px;
+    }
+
+    .placement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .placements-cta h2 {
+        font-size: 30px;
+    }
+}

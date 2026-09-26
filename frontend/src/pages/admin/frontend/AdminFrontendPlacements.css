@@ -1,0 +1,665 @@
+/* =========================================================
+   ADMIN FRONTEND PLACEMENTS
+========================================================= */
+
+.admin-frontend-placements {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-frontend-placements .admin-frontend-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.admin-frontend-placements .admin-frontend-section-header h2 {
+    margin: 0;
+    color: #172033;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.admin-frontend-placements .admin-frontend-section-header p {
+    margin: 6px 0 0;
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   SUCCESS / ERROR
+========================================================= */
+
+.admin-frontend-placements .frontend-data-success,
+.admin-frontend-placements .frontend-data-error {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-frontend-placements .frontend-data-success {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.admin-frontend-placements .frontend-data-error {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.admin-frontend-placements .admin-settings-card {
+    width: 100%;
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e7ebf2;
+    border-radius: 14px;
+
+    padding: 24px;
+    margin-bottom: 24px;
+
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.admin-frontend-placements .admin-settings-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.admin-frontend-placements .admin-settings-card-header h3 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+.admin-frontend-placements .admin-settings-card-header p {
+    margin: 6px 0 0;
+
+    color: #718096;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.admin-frontend-placements .frontend-data-form {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.admin-frontend-placements .frontend-data-form-group {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.admin-frontend-placements .frontend-data-form-group label {
+    display: block;
+
+    margin: 0;
+
+    color: #374151;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 1.4;
+}
+
+/* =========================================================
+   INPUT / TEXTAREA
+========================================================= */
+
+.admin-frontend-placements .frontend-data-form-group input,
+.admin-frontend-placements .frontend-data-form-group textarea,
+.admin-frontend-placements .frontend-data-form-group select {
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d9dee8;
+
+    border-radius: 9px;
+
+    padding: 11px 13px;
+
+    background: #ffffff;
+    color: #1f2937;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.admin-frontend-placements .frontend-data-form-group input {
+    min-height: 44px;
+}
+
+.admin-frontend-placements .frontend-data-form-group textarea {
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+.admin-frontend-placements
+.frontend-data-form-group input::placeholder,
+.admin-frontend-placements
+.frontend-data-form-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+.admin-frontend-placements
+.frontend-data-form-group input:focus,
+.admin-frontend-placements
+.frontend-data-form-group textarea:focus,
+.admin-frontend-placements
+.frontend-data-form-group select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.admin-frontend-placements .frontend-data-form-actions {
+    grid-column: 1 / -1;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 4px;
+}
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.admin-frontend-placements .frontend-data-checkbox-group {
+    grid-column: 1 / -1;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 42px;
+}
+
+.admin-frontend-placements
+.frontend-data-checkbox-group label {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin: 0;
+
+    color: #374151;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.admin-frontend-placements
+.frontend-data-checkbox-group
+input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+
+    margin: 0;
+
+    accent-color: #2563eb;
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.admin-frontend-placements
+.admin-primary-button,
+.admin-frontend-placements
+.admin-secondary-button,
+.admin-frontend-placements
+.admin-danger-button {
+    min-height: 40px;
+
+    border-radius: 8px;
+
+    padding: 9px 16px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+/* =========================================================
+   PRIMARY
+========================================================= */
+
+.admin-frontend-placements .admin-primary-button {
+    border: 1px solid #2563eb;
+
+    background: #2563eb;
+
+    color: #ffffff;
+}
+
+.admin-frontend-placements .admin-primary-button:hover {
+    background: #1d4ed8;
+
+    border-color: #1d4ed8;
+}
+
+/* =========================================================
+   SECONDARY
+========================================================= */
+
+.admin-frontend-placements .admin-secondary-button {
+    border: 1px solid #d9dee8;
+
+    background: #ffffff;
+
+    color: #374151;
+}
+
+.admin-frontend-placements
+.admin-secondary-button:hover {
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+}
+
+/* =========================================================
+   DANGER
+========================================================= */
+
+.admin-frontend-placements .admin-danger-button {
+    border: 1px solid #fecaca;
+
+    background: #ffffff;
+
+    color: #dc2626;
+}
+
+.admin-frontend-placements
+.admin-danger-button:hover {
+    background: #fef2f2;
+
+    border-color: #fca5a5;
+}
+
+/* =========================================================
+   DISABLED
+========================================================= */
+
+.admin-frontend-placements
+.admin-primary-button:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   FEATURE LIST
+========================================================= */
+
+.admin-frontend-placements .frontend-data-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+/* =========================================================
+   FEATURE ITEM
+========================================================= */
+
+.admin-frontend-placements .frontend-data-list-item {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 17px 18px;
+
+    border: 1px solid #e8ecf2;
+
+    border-radius: 11px;
+
+    background: #fafbfd;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.admin-frontend-placements
+.frontend-data-list-item:hover {
+    border-color: #cbd5e1;
+
+    background: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+/* =========================================================
+   FEATURE CONTENT
+========================================================= */
+
+.admin-frontend-placements
+.frontend-data-list-content {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.admin-frontend-placements
+.frontend-data-list-title {
+    margin: 0 0 6px;
+
+    color: #172033;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1.45;
+
+    word-break: break-word;
+}
+
+.admin-frontend-placements
+.frontend-data-list-description {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+/* =========================================================
+   META
+========================================================= */
+
+.admin-frontend-placements
+.frontend-data-list-meta {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 10px;
+}
+
+.admin-frontend-placements
+.frontend-data-list-meta span {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+/* Active / Inactive */
+
+.admin-frontend-placements
+.frontend-data-list-meta span:last-child {
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+/* =========================================================
+   LIST ACTIONS
+========================================================= */
+
+.admin-frontend-placements
+.frontend-data-list-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.admin-frontend-placements
+.frontend-data-empty {
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.admin-frontend-placements
+.frontend-data-loading {
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .admin-frontend-placements
+    .admin-settings-card {
+        padding: 20px;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-form {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-form-actions,
+    .admin-frontend-placements
+    .frontend-data-checkbox-group {
+        grid-column: auto;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-list-item {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-list-actions {
+        width: 100%;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-list-actions button {
+        flex: 1;
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .admin-frontend-placements
+    .admin-frontend-section-header {
+        margin-bottom: 18px;
+    }
+
+    .admin-frontend-placements
+    .admin-frontend-section-header h2 {
+        font-size: 20px;
+    }
+
+    .admin-frontend-placements
+    .admin-settings-card {
+        padding: 16px;
+
+        border-radius: 11px;
+    }
+
+    .admin-frontend-placements
+    .admin-settings-card-header {
+        margin-bottom: 18px;
+    }
+
+    .admin-frontend-placements
+    .admin-settings-card-header h3 {
+        font-size: 16px;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-form-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-form-actions button {
+        width: 100%;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-list-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .admin-frontend-placements
+    .frontend-data-list-actions button {
+        width: 100%;
+    }
+}

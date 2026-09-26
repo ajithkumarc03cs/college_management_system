@@ -1,0 +1,902 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.public-home {
+    min-height: 100vh;
+    background: #ffffff;
+    color: #1f2937;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.public-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-inner {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.college-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-placeholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.college-logo h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.college-logo span {
+    display: block;
+    margin-top: 3px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.public-nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.public-nav a {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.public-nav a:hover {
+    color: #2563eb;
+}
+
+.login-btn {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-section {
+    background: #f8fafc;
+    padding: 80px 0;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.hero-small-title,
+.section-label {
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hero-text h1 {
+    margin: 15px 0;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.1;
+}
+
+.hero-text p {
+    max-width: 560px;
+    color: #64748b;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.primary-btn,
+.secondary-btn {
+    display: inline-block;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.primary-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.secondary-btn {
+    background: #ffffff;
+    color: #2563eb;
+    border: 1px solid #2563eb;
+}
+
+.hero-image {
+    min-height: 380px;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 250px;
+    border-radius: 14px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.statistics-section {
+    padding: 45px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 25px 15px;
+}
+
+.stat-icon {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.stat-card h2 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.stat-card p {
+    margin: 7px 0 0;
+    color: #64748b;
+}
+
+
+/* =========================================================
+   COMMON SECTION
+========================================================= */
+
+.about-section,
+.courses-section,
+.offers-section,
+.departments-section,
+.why-section,
+.facilities-section,
+.events-section,
+.news-section,
+.gallery-section,
+.testimonial-section,
+.contact-section {
+    padding: 80px 0;
+}
+
+.section-heading {
+    max-width: 700px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.section-heading h2,
+.about-content h2,
+.admission-content h2,
+.placement-content h2,
+.contact-section h2 {
+    margin: 12px 0;
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+.section-heading p {
+    color: #64748b;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-image {
+    min-height: 420px;
+}
+
+.about-content p {
+    color: #64748b;
+    line-height: 1.8;
+}
+
+.about-content .primary-btn {
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   COURSES
+========================================================= */
+
+.courses-section {
+    background: #f8fafc;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.course-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.course-image {
+    height: 190px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+}
+
+.course-content {
+    padding: 22px;
+}
+
+.course-content > span {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.course-content h3 {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.course-content p {
+    color: #64748b;
+}
+
+.course-content a {
+    color: #2563eb;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.section-button {
+    text-align: center;
+    margin-top: 35px;
+}
+
+
+/* =========================================================
+   ADMISSION
+========================================================= */
+
+.admission-section {
+    padding: 60px 0;
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.admission-content,
+.placement-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.admission-content .section-label {
+    color: #dbeafe;
+}
+
+.admission-content h2,
+.placement-content h2 {
+    margin-bottom: 10px;
+}
+
+.admission-content p,
+.placement-content p {
+    margin: 0;
+    line-height: 1.7;
+}
+
+.admission-content .primary-btn,
+.placement-content .primary-btn {
+    background: #ffffff;
+    color: #2563eb;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   OFFERS
+========================================================= */
+
+.offer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.offer-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.offer-icon {
+    font-size: 34px;
+}
+
+.offer-card h3 {
+    margin: 18px 0 10px;
+}
+
+.offer-card p {
+    color: #64748b;
+    line-height: 1.7;
+}
+
+.offer-card a {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   DEPARTMENTS
+========================================================= */
+
+.departments-section {
+    background: #f8fafc;
+}
+
+.department-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.department-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.department-card span {
+    font-size: 34px;
+}
+
+.department-card h3 {
+    margin: 15px 0 8px;
+}
+
+.department-card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   WHY CHOOSE US
+========================================================= */
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.why-card {
+    padding: 25px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.why-card span {
+    font-size: 30px;
+}
+
+.why-card h3 {
+    margin: 15px 0 10px;
+}
+
+.why-card p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FACILITIES
+========================================================= */
+
+.facility-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.facility-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.facility-card .image-placeholder {
+    min-height: 190px;
+    border-radius: 0;
+}
+
+.facility-card h3 {
+    padding: 0 18px 18px;
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+.events-section {
+    background: #f8fafc;
+}
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.event-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.event-image {
+    height: 190px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+}
+
+.event-content {
+    padding: 22px;
+}
+
+.event-content > span {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.event-content h3 {
+    margin: 10px 0;
+}
+
+.event-content p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   NEWS
+========================================================= */
+
+.news-list {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.news-item {
+    display: grid;
+    grid-template-columns: 130px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.news-item > span {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.news-item h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.news-item a {
+    color: #2563eb;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   PLACEMENT
+========================================================= */
+
+.placement-section {
+    padding: 65px 0;
+    background: #f8fafc;
+}
+
+.placement-content {
+    align-items: center;
+}
+
+.placement-content p {
+    max-width: 650px;
+    color: #64748b;
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.gallery-image {
+    min-height: 220px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+}
+
+
+/* =========================================================
+   TESTIMONIALS
+========================================================= */
+
+.testimonial-section {
+    background: #f8fafc;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.testimonial-card p {
+    color: #475569;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.testimonial-card h3 {
+    margin-bottom: 5px;
+}
+
+.testimonial-card span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.contact-info {
+    margin-top: 25px;
+}
+
+.contact-info p {
+    color: #475569;
+    margin: 12px 0;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form .primary-btn {
+    border: none;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.public-footer {
+    background: #111827;
+    color: #ffffff;
+    padding-top: 60px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 50px;
+}
+
+.footer-about p {
+    color: #9ca3af;
+    line-height: 1.7;
+    max-width: 350px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-column h3 {
+    margin: 0 0 8px;
+}
+
+.footer-column a {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.footer-column a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    border-top: 1px solid #374151;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .public-nav {
+        display: none;
+    }
+
+    .hero-content,
+    .two-column,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .course-grid,
+    .offer-grid,
+    .event-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .department-grid,
+    .why-grid,
+    .facility-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .header-inner {
+        min-height: 68px;
+    }
+
+    .college-logo h2 {
+        font-size: 16px;
+    }
+
+    .college-logo span {
+        font-size: 10px;
+    }
+
+    .login-btn {
+        padding: 9px 13px;
+    }
+
+    .hero-section {
+        padding: 55px 0;
+    }
+
+    .hero-text h1 {
+        font-size: 38px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons a {
+        text-align: center;
+    }
+
+    .statistics-grid,
+    .course-grid,
+    .offer-grid,
+    .department-grid,
+    .why-grid,
+    .facility-grid,
+    .event-grid,
+    .gallery-grid,
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-section,
+    .courses-section,
+    .offers-section,
+    .departments-section,
+    .why-section,
+    .facilities-section,
+    .events-section,
+    .news-section,
+    .gallery-section,
+    .testimonial-section,
+    .contact-section {
+        padding: 60px 0;
+    }
+
+    .section-heading h2,
+    .about-content h2,
+    .contact-section h2 {
+        font-size: 30px;
+    }
+
+    .admission-content,
+    .placement-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .news-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

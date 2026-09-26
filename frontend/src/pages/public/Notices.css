@@ -1,0 +1,346 @@
+/* =========================================================
+   PUBLIC NOTICES
+========================================================= */
+
+.public-notices {
+    background: #ffffff;
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.public-notices .container {
+    width: min(1000px, 92%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.notices-page-hero {
+    padding: 60px 0;
+
+    background: #f1f5f9;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.notices-page-hero .section-label {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: #2563eb;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.notices-page-hero h1 {
+    margin: 0 0 12px;
+
+    color: #0f172a;
+
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 750;
+}
+
+.notices-page-hero p {
+    max-width: 680px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   NOTICES SECTION
+========================================================= */
+
+.notices-list-section {
+    padding: 60px 0 70px;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.notices-list-section .section-heading {
+    margin-bottom: 32px;
+}
+
+.notices-list-section .section-label {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #2563eb;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.notices-list-section h2 {
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: 28px;
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   NOTICE LIST
+========================================================= */
+
+.public-notices-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* =========================================================
+   NOTICE CARD
+========================================================= */
+
+.public-notice-card {
+    display: grid;
+
+    grid-template-columns: 120px 1fr;
+
+    gap: 24px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    box-shadow: 0 5px 16px rgba(15, 23, 42, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.public-notice-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #bfdbfe;
+
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.10);
+}
+
+
+/* =========================================================
+   NOTICE DATE
+========================================================= */
+
+.notice-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 85px;
+
+    padding: 12px;
+
+    background: #eff6ff;
+
+    border: 1px solid #dbeafe;
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.notice-date strong {
+    color: #1d4ed8;
+
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   NOTICE CONTENT
+========================================================= */
+
+.notice-content {
+    min-width: 0;
+}
+
+.notice-content > span {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: #2563eb;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+
+    text-transform: uppercase;
+}
+
+.notice-content h3 {
+    margin: 0 0 8px;
+
+    color: #0f172a;
+
+    font-size: 19px;
+    line-height: 1.35;
+    font-weight: 700;
+}
+
+.notice-content p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.public-notices-list > p {
+    padding: 40px 20px;
+
+    margin: 0;
+
+    background: #f8fafc;
+
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+
+    color: #64748b;
+
+    text-align: center;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.notices-page-hero .container > p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .notices-page-hero {
+        padding: 50px 0;
+    }
+
+    .notices-page-hero h1 {
+        font-size: 32px;
+    }
+
+    .notices-list-section {
+        padding: 50px 0 60px;
+    }
+
+    .public-notice-card {
+        grid-template-columns: 100px 1fr;
+
+        gap: 18px;
+
+        padding: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .notices-page-hero {
+        padding: 42px 0;
+    }
+
+    .notices-page-hero h1 {
+        font-size: 28px;
+    }
+
+    .notices-page-hero p {
+        font-size: 14px;
+    }
+
+    .notices-list-section {
+        padding: 42px 0 55px;
+    }
+
+    .notices-list-section h2 {
+        font-size: 24px;
+    }
+
+    .public-notice-card {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .notice-date {
+        justify-content: flex-start;
+
+        min-height: auto;
+
+        width: fit-content;
+
+        padding: 9px 14px;
+    }
+
+    .notice-date strong {
+        font-size: 13px;
+    }
+
+    .notice-content h3 {
+        font-size: 18px;
+    }
+
+    .notice-content p {
+        font-size: 14px;
+    }
+
+}

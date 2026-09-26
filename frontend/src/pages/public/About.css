@@ -1,0 +1,367 @@
+/* =========================================================
+   ABOUT PAGE
+========================================================= */
+
+.about-page {
+    width: 100%;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.about-hero {
+    padding: 90px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+}
+
+.about-hero h1 {
+    margin: 0 0 16px;
+    font-size: 48px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.about-hero p {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #64748b;
+}
+
+/* =========================================================
+   COMMON CONTAINER
+========================================================= */
+
+.about-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   ABOUT INTRO
+========================================================= */
+
+.about-intro {
+    padding: 80px 20px;
+    background: #ffffff;
+}
+
+.about-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-intro-content span {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #2563eb;
+}
+
+.about-intro-content h2 {
+    margin: 0 0 20px;
+    font-size: 38px;
+    line-height: 1.2;
+    color: #0f172a;
+}
+
+.about-intro-content p {
+    margin: 0 0 16px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #64748b;
+}
+
+.about-intro-image {
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    font-size: 90px;
+}
+
+/* =========================================================
+   VISION / MISSION
+========================================================= */
+
+.about-vision {
+    padding: 80px 20px;
+    background: #f8fafc;
+}
+
+.about-vision-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+.about-vision-card {
+    padding: 35px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.about-vision-card h3 {
+    margin: 0 0 15px;
+    font-size: 25px;
+    color: #0f172a;
+}
+
+.about-vision-card p {
+    margin: 0;
+    line-height: 1.8;
+    color: #64748b;
+}
+
+/* =========================================================
+   CORE VALUES
+========================================================= */
+
+.about-values {
+    padding: 80px 20px;
+    background: #ffffff;
+}
+
+.about-section-heading {
+    max-width: 700px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.about-section-heading span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #2563eb;
+}
+
+.about-section-heading h2 {
+    margin: 0 0 14px;
+    font-size: 36px;
+    color: #0f172a;
+}
+
+.about-section-heading p {
+    margin: 0;
+    line-height: 1.7;
+    color: #64748b;
+}
+
+.about-values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.about-value-card {
+    padding: 30px 22px;
+    text-align: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+}
+
+.about-value-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #dbeafe;
+    font-size: 30px;
+}
+
+.about-value-card h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #0f172a;
+}
+
+.about-value-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #64748b;
+}
+
+/* =========================================================
+   FACILITIES
+========================================================= */
+
+.about-facilities {
+    padding: 80px 20px;
+    background: #f8fafc;
+}
+
+.about-facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.about-facility-card {
+    padding: 28px 20px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+}
+
+.about-facility-card:hover {
+    transform: translateY(-5px);
+}
+
+.about-facility-icon {
+    margin-bottom: 15px;
+    font-size: 42px;
+}
+
+.about-facility-card h3 {
+    margin: 0;
+    font-size: 19px;
+    color: #0f172a;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.about-cta {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    text-align: center;
+}
+
+.about-cta-content {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.about-cta h2 {
+    margin: 0 0 16px;
+    font-size: 38px;
+    color: #ffffff;
+}
+
+.about-cta p {
+    margin: 0 auto 28px;
+    line-height: 1.7;
+    font-size: 17px;
+    color: #dbeafe;
+}
+
+.about-cta-button {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1d4ed8;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.about-cta-button:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+    .about-values-grid,
+    .about-facilities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-intro-grid {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 70px 20px;
+    }
+
+    .about-hero h1 {
+        font-size: 38px;
+    }
+
+    .about-intro,
+    .about-vision,
+    .about-values,
+    .about-facilities,
+    .about-cta {
+        padding: 60px 20px;
+    }
+
+    .about-intro-grid,
+    .about-vision-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-intro-content h2 {
+        font-size: 32px;
+    }
+
+    .about-section-heading h2 {
+        font-size: 30px;
+    }
+
+    .about-cta h2 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 500px) {
+    .about-hero {
+        padding: 55px 15px;
+    }
+
+    .about-hero h1 {
+        font-size: 32px;
+    }
+
+    .about-hero p {
+        font-size: 16px;
+    }
+
+    .about-values-grid,
+    .about-facilities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-intro-image {
+        min-height: 250px;
+        font-size: 70px;
+    }
+
+    .about-vision-card {
+        padding: 25px;
+    }
+}

@@ -1,0 +1,611 @@
+/* =========================================================
+   ADMIN ABOUT PAGE
+========================================================= */
+
+.admin-about-page {
+    width: 100%;
+    min-height: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.admin-page-header {
+    margin-bottom: 24px;
+}
+
+.admin-page-header h1 {
+    margin: 0;
+    color: #111827;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.admin-page-header p {
+    margin: 7px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SUCCESS / ERROR
+========================================================= */
+
+.about-success,
+.about-error {
+    margin-bottom: 18px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.about-success {
+    color: #047857;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+}
+
+.about-error {
+    color: #b91c1c;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.admin-about-card {
+    margin-bottom: 24px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.about-card-header {
+    padding: 20px 22px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.about-card-header h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.about-card-header p {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.about-section {
+    padding: 22px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.about-section:last-child {
+    border-bottom: none;
+}
+
+.about-section h3 {
+    margin: 0 0 18px;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.about-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.about-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.about-field-full {
+    grid-column: 1 / -1;
+}
+
+.about-field label {
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   INPUT / TEXTAREA
+========================================================= */
+
+.about-field input,
+.about-field textarea,
+.about-field select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    color: #111827;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.about-field textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.55;
+}
+
+.about-field input::placeholder,
+.about-field textarea::placeholder {
+    color: #9ca3af;
+}
+
+.about-field input:focus,
+.about-field textarea:focus,
+.about-field select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
+
+.about-field input[type="file"] {
+    padding: 9px;
+    background: #f9fafb;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+.about-image-preview {
+    width: 220px;
+    height: 140px;
+    margin-top: 10px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.about-checkbox {
+    display: flex;
+    align-items: center;
+    align-self: end;
+    gap: 9px;
+    min-height: 42px;
+}
+
+.about-checkbox input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    accent-color: #2563eb;
+}
+
+.about-checkbox label {
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.about-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.about-save-btn,
+.about-cancel-btn,
+.about-edit-btn,
+.about-delete-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+.about-save-btn {
+    color: #ffffff;
+    background: #2563eb;
+}
+
+.about-save-btn:hover {
+    background: #1d4ed8;
+}
+
+.about-save-btn:active {
+    transform: translateY(1px);
+}
+
+.about-save-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   CANCEL
+========================================================= */
+
+.about-cancel-btn {
+    color: #374151;
+    background: #e5e7eb;
+}
+
+.about-cancel-btn:hover {
+    background: #d1d5db;
+}
+
+
+/* =========================================================
+   LIST SECTION
+========================================================= */
+
+.about-list-section {
+    padding: 22px;
+}
+
+
+/* =========================================================
+   LIST HEADER
+========================================================= */
+
+.about-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.about-list-header h3 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.about-list-header span {
+    padding: 5px 10px;
+    color: #4b5563;
+    background: #f3f4f6;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.about-empty {
+    padding: 30px 20px;
+    color: #6b7280;
+    background: #f9fafb;
+    border: 1px dashed #d1d5db;
+    border-radius: 9px;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ITEM LIST
+========================================================= */
+
+.about-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* =========================================================
+   ITEM
+========================================================= */
+
+.about-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 17px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.about-item:hover {
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ITEM CONTENT
+========================================================= */
+
+.about-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.about-item-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 7px;
+}
+
+.about-item-title-row h4 {
+    margin: 0;
+    color: #111827;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.about-item-content p {
+    margin: 7px 0 0;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.about-item-icon {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 4px 8px;
+    color: #2563eb;
+    background: #eff6ff;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.about-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.about-status.active {
+    color: #15803d;
+    background: #dcfce7;
+}
+
+.about-status.inactive {
+    color: #b91c1c;
+    background: #fee2e2;
+}
+
+
+/* =========================================================
+   FACILITY IMAGE
+========================================================= */
+
+.about-facility-image {
+    width: 120px;
+    height: 90px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 7px;
+    border: 1px solid #e5e7eb;
+    background: #f3f4f6;
+}
+
+
+/* =========================================================
+   ITEM ACTIONS
+========================================================= */
+
+.about-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+}
+
+.about-edit-btn {
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+.about-edit-btn:hover {
+    background: #dbeafe;
+}
+
+.about-delete-btn {
+    color: #dc2626;
+    background: #fef2f2;
+}
+
+.about-delete-btn:hover {
+    background: #fee2e2;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.admin-about-loading {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .about-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-field-full {
+        grid-column: auto;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .admin-about-page {
+        padding: 16px;
+    }
+
+    .about-section,
+    .about-list-section {
+        padding: 17px;
+    }
+
+    .about-item {
+        flex-direction: column;
+    }
+
+    .about-facility-image {
+        width: 100%;
+        height: 180px;
+    }
+
+    .about-item-actions {
+        width: 100%;
+    }
+
+    .about-edit-btn,
+    .about-delete-btn {
+        flex: 1;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .admin-page-header h1 {
+        font-size: 23px;
+    }
+
+    .about-card-header {
+        padding: 16px;
+    }
+
+    .about-card-header h2 {
+        font-size: 17px;
+    }
+
+    .about-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .about-save-btn,
+    .about-cancel-btn {
+        width: 100%;
+    }
+
+    .about-item-title-row {
+        flex-wrap: wrap;
+    }
+
+    .about-list-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
