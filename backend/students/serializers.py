@@ -376,11 +376,14 @@ class StudentCreateSerializer(
         # FINAL ROLL NUMBER
         # ----------------------------------------------------
 
+        # return (
+        #     f"{prefix}"
+        #     f"{next_number:03d}"
+        # )
         return (
             f"{prefix}"
-            f"{next_number:03d}"
+            f"{next_number:02d}"
         )
-
     # ========================================================
     # CREATE STUDENT + USER
     # ========================================================

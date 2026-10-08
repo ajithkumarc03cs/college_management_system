@@ -125,6 +125,7 @@ DATABASES = {
         "PORT": "3307",
     }
 }
+STATIC_URL = "static/"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 

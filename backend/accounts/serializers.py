@@ -6096,3 +6096,254 @@ class AdminCourseApplicationStatusSerializer(
             )
 
         return value
+# ============================================================
+# HOME PAGE
+# ============================================================
+
+class HomeStatisticSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeStatistic
+        fields = "__all__"
+
+
+class HomeCourseSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeCourse
+        fields = "__all__"
+
+        extra_kwargs = {
+            "home": {
+                "required": False
+            }
+        }
+
+
+class HomeOfferSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeOffer
+        fields = "__all__"
+
+
+class HomeDepartmentSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeDepartment
+        fields = "__all__"
+
+
+class HomeWhyChooseSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeWhyChoose
+        fields = "__all__"
+
+
+class HomeFacilitySerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeFacility
+        fields = "__all__"
+
+
+class HomeEventSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeEvent
+        fields = "__all__"
+
+
+class HomeNoticeSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeNotice
+        fields = "__all__"
+
+
+class HomeGallerySerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeGallery
+        fields = "__all__"
+
+
+class HomeTestimonialSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = HomeTestimonial
+        fields = "__all__"
+
+
+class HomePageSerializer(
+    serializers.ModelSerializer
+):
+
+    statistics = HomeStatisticSerializer(
+        many=True,
+        read_only=True
+    )
+
+    courses = HomeCourseSerializer(
+        many=True,
+        read_only=True
+    )
+
+    offers = HomeOfferSerializer(
+        many=True,
+        read_only=True
+    )
+
+    departments = HomeDepartmentSerializer(
+        many=True,
+        read_only=True
+    )
+
+    why_choose_us = HomeWhyChooseSerializer(
+        many=True,
+        read_only=True
+    )
+
+    facilities = HomeFacilitySerializer(
+        many=True,
+        read_only=True
+    )
+
+    events = HomeEventSerializer(
+        many=True,
+        read_only=True
+    )
+
+    notices = HomeNoticeSerializer(
+        many=True,
+        read_only=True
+    )
+
+    gallery = HomeGallerySerializer(
+        many=True,
+        read_only=True
+    )
+
+    testimonials = HomeTestimonialSerializer(
+        many=True,
+        read_only=True
+    )
+
+    class Meta:
+
+        model = HomePage
+
+        fields = [
+            "id",
+
+            # Hero
+            "hero_small_title",
+            "hero_title",
+            "hero_description",
+            "hero_button_1_text",
+            "hero_button_1_link",
+            "hero_button_2_text",
+            "hero_button_2_link",
+            "hero_image",
+
+            # About
+            "about_label",
+            "about_title",
+            "about_description_1",
+            "about_description_2",
+            "about_image",
+
+            # Courses
+            "courses_label",
+            "courses_title",
+            "courses_description",
+
+            # Admissions
+            "admission_label",
+            "admission_title",
+            "admission_description",
+            "admission_button_text",
+            "admission_button_link",
+
+            # Offers
+            "offers_label",
+            "offers_title",
+
+            # Departments
+            "departments_label",
+            "departments_title",
+
+            # Why Choose Us
+            "why_label",
+            "why_title",
+
+            # Facilities
+            "facilities_label",
+            "facilities_title",
+
+            # Events
+            "events_label",
+            "events_title",
+
+            # Notices
+            "notices_label",
+            "notices_title",
+
+            # Placements
+            "placement_label",
+            "placement_title",
+            "placement_description",
+            "placement_button_text",
+            "placement_button_link",
+
+            # Gallery
+            "gallery_label",
+            "gallery_title",
+
+            # Testimonials
+            "testimonial_label",
+            "testimonial_title",
+
+            # Contact
+            "contact_label",
+            "contact_title",
+            "contact_description",
+            "contact_address",
+            "contact_phone",
+            "contact_email",
+
+            # Related data
+            "statistics",
+            "courses",
+            "offers",
+            "departments",
+            "why_choose_us",
+            "facilities",
+            "events",
+            "notices",
+            "gallery",
+            "testimonials",
+
+            "updated_at",
+        ]

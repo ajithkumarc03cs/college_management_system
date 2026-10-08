@@ -1375,7 +1375,7 @@ function Home() {
                     </div>
 
 
-                    <div className="hero-image">
+                    {/* <div className="hero-image">
 
                         {home.hero_image ? (
 
@@ -1392,8 +1392,20 @@ function Home() {
 
                         )}
 
+                    </div> */}
+                    <div className="hero-image">
+                        {home.hero_image ? (
+                            <img
+                                src={home.hero_image}
+                                alt="College Campus"
+                                className="college-hero-image"
+                            />
+                        ) : (
+                            <div className="image-placeholder">
+                                College Banner Image
+                            </div>
+                        )}
                     </div>
-
                 </div>
 
             </section>
@@ -1442,7 +1454,7 @@ function Home() {
             <section className="about-section">
 
                 <div className="container two-column">
-
+{/* 
                     <div className="about-image">
 
                         {home.about_image ? (
@@ -1460,8 +1472,20 @@ function Home() {
 
                         )}
 
+                    </div> */}
+                    <div className="about-image">
+                        {home.about_image ? (
+                            <img
+                                src={home.about_image}
+                                alt="College Campus"
+                                className="college-about-image"
+                            />
+                        ) : (
+                            <div className="image-placeholder">
+                                College Image
+                            </div>
+                        )}
                     </div>
-
 
                     <div className="about-content">
 

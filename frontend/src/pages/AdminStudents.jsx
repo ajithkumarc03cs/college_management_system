@@ -711,6 +711,7 @@ function AdminStudents() {
 
                                     <th>ID</th>
                                     <th>Username</th>
+                                    <th>Roll Number</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -756,7 +757,9 @@ function AdminStudents() {
                                                 <td>
                                                     {student.username}
                                                 </td>
-
+                                                <td>
+                                                    {student.roll_number}
+                                                </td>
                                                 <td>
                                                     {student.name}
                                                 </td>
