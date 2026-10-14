@@ -1,284 +1,422 @@
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+
+// import api from "../api/axios";
+
+
+// function Login() {
+
+//     const navigate = useNavigate();
+
+//     const [username, setUsername] = useState("");
+//     const [password, setPassword] = useState("");
+
+//     const [error, setError] = useState("");
+
+//     const [loading, setLoading] = useState(false);
+
+
+//     // ========================================================
+//     // LOGIN
+//     // ========================================================
+
+//     const handleLogin = async (e) => {
+
+//         e.preventDefault();
+
+//         setError("");
+
+//         setLoading(true);
+
+
+//         try {
+
+//             const response = await api.post(
+//                 "login/",
+//                 {
+//                     username: username,
+//                     password: password
+//                 }
+//             );
+
+
+//             console.log(
+//                 "Login response:",
+//                 response.data
+//             );
+
+
+//             // =================================================
+//             // SAVE ACCESS TOKEN
+//             // =================================================
+
+//             localStorage.setItem(
+//                 "access",
+//                 response.data.access
+//             );
+
+
+//             // =================================================
+//             // SAVE REFRESH TOKEN
+//             // =================================================
+
+//             localStorage.setItem(
+//                 "refresh",
+//                 response.data.refresh
+//             );
+
+
+//             // =================================================
+//             // GET USER ROLE
+//             // =================================================
+
+//             const role = response.data.role;
+
+
+//             console.log(
+//                 "User role:",
+//                 role
+//             );
+
+
+//             // =================================================
+//             // ROLE BASED DASHBOARD
+//             // =================================================
+
+//             if (role === "Student") {
+
+//                 navigate("/dashboard");
+
+//             }
+
+
+//             else if (role === "Staff") {
+
+//                 navigate("/staff/dashboard");
+
+//             }
+
+
+//             else if (role === "HOD") {
+
+//                 navigate("/hod/dashboard");
+
+//             }
+
+
+//             else if (role === "Admin") {
+
+//                 navigate("/admin/dashboard");
+
+//             }
+
+
+//             else if (role === "Principal") {
+
+//                 navigate("/principal/dashboard");
+
+//             }
+
+
+//             else {
+
+//                 setError(
+//                     "Invalid user role."
+//                 );
+
+//             }
+
+
+//         } catch (error) {
+
+//             console.log(
+//                 "Login error:",
+//                 error.response?.data
+//             );
+
+
+//             if (error.response?.data) {
+
+//                 setError(
+//                     error.response.data.detail ||
+//                     "Invalid username or password"
+//                 );
+
+//             }
+
+//             else {
+
+//                 setError(
+//                     "Unable to connect to server"
+//                 );
+
+//             }
+
+//         }
+
+//         finally {
+
+//             setLoading(false);
+
+//         }
+
+//     };
+
+
+//     // ========================================================
+//     // LOGIN PAGE
+//     // ========================================================
+
+//     return (
+
+//         <div>
+
+//             <h1>
+//                 College Management System
+//             </h1>
+
+
+//             <h2>
+//                 Login
+//             </h2>
+
+
+//             {/* =================================================
+//                 ERROR MESSAGE
+//             ================================================= */}
+
+//             {error && (
+
+//                 <p>
+//                     {error}
+//                 </p>
+
+//             )}
+
+
+//             {/* =================================================
+//                 LOGIN FORM
+//             ================================================= */}
+
+//             <form onSubmit={handleLogin}>
+
+
+//                 {/* =============================================
+//                     USERNAME
+//                 ============================================= */}
+
+//                 <div>
+
+//                     <label>
+//                         Username
+//                     </label>
+
+//                     <br />
+
+//                     <input
+//                         type="text"
+//                         value={username}
+//                         onChange={(e) =>
+//                             setUsername(e.target.value)
+//                         }
+//                         required
+//                     />
+
+//                 </div>
+
+
+//                 <br />
+
+
+//                 {/* =============================================
+//                     PASSWORD
+//                 ============================================= */}
+
+//                 <div>
+
+//                     <label>
+//                         Password
+//                     </label>
+
+//                     <br />
+
+//                     <input
+//                         type="password"
+//                         value={password}
+//                         onChange={(e) =>
+//                             setPassword(e.target.value)
+//                         }
+//                         required
+//                     />
+
+//                 </div>
+
+
+//                 <br />
+
+
+//                 {/* =============================================
+//                     LOGIN BUTTON
+//                 ============================================= */}
+
+//                 <button
+//                     type="submit"
+//                     disabled={loading}
+//                 >
+
+//                     {loading
+//                         ? "Logging in..."
+//                         : "Login"
+//                     }
+
+//                 </button>
+
+
+//             </form>
+
+//         </div>
+
+//     );
+
+// }
+
+
+// export default Login;
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import api from "../api/axios";
-
+import "./Login.css";
 
 function Login() {
-
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
     const [error, setError] = useState("");
-
     const [loading, setLoading] = useState(false);
 
-
-    // ========================================================
-    // LOGIN
-    // ========================================================
-
     const handleLogin = async (e) => {
-
         e.preventDefault();
 
         setError("");
-
         setLoading(true);
 
-
         try {
+            const response = await api.post("login/", {
+                username,
+                password
+            });
 
-            const response = await api.post(
-                "login/",
-                {
-                    username: username,
-                    password: password
-                }
-            );
-
-
-            console.log(
-                "Login response:",
-                response.data
-            );
-
-
-            // =================================================
-            // SAVE ACCESS TOKEN
-            // =================================================
-
-            localStorage.setItem(
-                "access",
-                response.data.access
-            );
-
-
-            // =================================================
-            // SAVE REFRESH TOKEN
-            // =================================================
-
-            localStorage.setItem(
-                "refresh",
-                response.data.refresh
-            );
-
-
-            // =================================================
-            // GET USER ROLE
-            // =================================================
+            localStorage.setItem("access", response.data.access);
+            localStorage.setItem("refresh", response.data.refresh);
 
             const role = response.data.role;
 
-
-            console.log(
-                "User role:",
-                role
-            );
-
-
-            // =================================================
-            // ROLE BASED DASHBOARD
-            // =================================================
-
             if (role === "Student") {
-
                 navigate("/dashboard");
-
-            }
-
-
-            else if (role === "Staff") {
-
+            } else if (role === "Staff") {
                 navigate("/staff/dashboard");
-
-            }
-
-
-            else if (role === "HOD") {
-
+            } else if (role === "HOD") {
                 navigate("/hod/dashboard");
-
-            }
-
-
-            else if (role === "Admin") {
-
+            } else if (role === "Admin") {
                 navigate("/admin/dashboard");
-
-            }
-
-
-            else if (role === "Principal") {
-
+            } else if (role === "Principal") {
                 navigate("/principal/dashboard");
-
+            } else {
+                setError("Invalid user role.");
             }
-
-
-            else {
-
-                setError(
-                    "Invalid user role."
-                );
-
-            }
-
-
         } catch (error) {
-
-            console.log(
-                "Login error:",
-                error.response?.data
-            );
-
+            console.log("Login error:", error.response?.data);
 
             if (error.response?.data) {
-
                 setError(
                     error.response.data.detail ||
                     "Invalid username or password"
                 );
-
+            } else {
+                setError("Unable to connect to server");
             }
-
-            else {
-
-                setError(
-                    "Unable to connect to server"
-                );
-
-            }
-
-        }
-
-        finally {
-
+        } finally {
             setLoading(false);
-
         }
-
     };
 
-
-    // ========================================================
-    // LOGIN PAGE
-    // ========================================================
-
     return (
+        <div className="login-page">
+            <div className="login-card">
 
-        <div>
+                <div className="login-icon">🎓</div>
 
-            <h1>
-                Student Management System
-            </h1>
+                <h1>College Portal</h1>
 
-
-            <h2>
-                Login
-            </h2>
-
-
-            {/* =================================================
-                ERROR MESSAGE
-            ================================================= */}
-
-            {error && (
-
-                <p>
-                    {error}
+                <p className="login-subtitle">
+                    College Management System
                 </p>
 
-            )}
+                <div className="login-divider"></div>
 
+                <h2>Welcome Back!</h2>
 
-            {/* =================================================
-                LOGIN FORM
-            ================================================= */}
+                <p className="login-description">
+                    Sign in to access your account
+                </p>
 
-            <form onSubmit={handleLogin}>
+                {error && (
+                    <div className="login-error" role="alert">
+                        ⚠️ {error}
+                    </div>
+                )}
 
+                <form onSubmit={handleLogin}>
+                    <div className="form-group">
+                        <label htmlFor="username">Username</label>
 
-                {/* =============================================
-                    USERNAME
-                ============================================= */}
+                        <input
+                            id="username"
+                            type="text"
+                            placeholder="Enter your username"
+                            value={username}
+                            onChange={(e) =>
+                                setUsername(e.target.value)
+                            }
+                            autoComplete="username"
+                            required
+                        />
+                    </div>
 
-                <div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
 
-                    <label>
-                        Username
-                    </label>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) =>
+                                setPassword(e.target.value)
+                            }
+                            autoComplete="current-password"
+                            required
+                        />
+                    </div>
 
-                    <br />
+                    <button
+                        type="submit"
+                        className="login-button"
+                        disabled={loading}
+                    >
+                        {loading ? "Logging in..." : "Sign In"}
+                    </button>
+                </form>
 
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) =>
-                            setUsername(e.target.value)
-                        }
-                        required
-                    />
+                <p className="login-footer">
+                    © 2026 College Management System
+                </p>
 
-                </div>
-
-
-                <br />
-
-
-                {/* =============================================
-                    PASSWORD
-                ============================================= */}
-
-                <div>
-
-                    <label>
-                        Password
-                    </label>
-
-                    <br />
-
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) =>
-                            setPassword(e.target.value)
-                        }
-                        required
-                    />
-
-                </div>
-
-
-                <br />
-
-
-                {/* =============================================
-                    LOGIN BUTTON
-                ============================================= */}
-
-                <button
-                    type="submit"
-                    disabled={loading}
-                >
-
-                    {loading
-                        ? "Logging in..."
-                        : "Login"
-                    }
-
-                </button>
-
-
-            </form>
-
+            </div>
         </div>
-
     );
-
 }
-
 
 export default Login;

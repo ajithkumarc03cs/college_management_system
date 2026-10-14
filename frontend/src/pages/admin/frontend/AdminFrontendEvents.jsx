@@ -12,7 +12,7 @@ function AdminFrontendEvents() {
         section_title: "",
     });
 
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState([]);[]
 
     const [eventForm, setEventForm] = useState({
         date: "",

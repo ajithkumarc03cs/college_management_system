@@ -11,7 +11,7 @@ function Header({ role }) {
                 <div className="header-title">
 
                     <h2>
-                        Student Management System
+                        College Management System
                     </h2>
 
                     <span>
