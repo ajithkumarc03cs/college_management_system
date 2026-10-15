@@ -139,6 +139,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+import os
+import dj_database_url
+
 if os.environ.get("DATABASE_URL"):
     DATABASES = {
         "default": dj_database_url.parse(
@@ -151,11 +154,9 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": os.environ.get(
-                "DB_NAME", "student_management"
-            ),
+            "NAME": os.environ.get("DB_NAME", "student_management"),
             "USER": os.environ.get("DB_USER", "root"),
-            "PASSWORD": os.environ.get("DB_PASSWORD", "Mysql@1234"),
+            "PASSWORD": os.environ.get("DB_PASSWORD", ""),
             "HOST": os.environ.get("DB_HOST", "127.0.0.1"),
             "PORT": os.environ.get("DB_PORT", "3307"),
         }
