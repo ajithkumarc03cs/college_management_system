@@ -291,6 +291,7 @@ import "./Login.css";
 function Login() {
     const navigate = useNavigate();
 
+    const [role, setRole] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -305,37 +306,47 @@ function Login() {
         try {
             const response = await api.post("login/", {
                 username,
-                password
+                password,
+                role,
             });
 
+            // Backend returns the actual authenticated role
+            const actualRole = response.data.role;
+
+            if (
+                !actualRole ||
+                actualRole.toLowerCase() !== role.toLowerCase()
+            ) {
+                setError(
+                    "Selected role does not match your account role."
+                );
+                return;
+            }
+
+            // Store tokens only after role verification
             localStorage.setItem("access", response.data.access);
             localStorage.setItem("refresh", response.data.refresh);
 
-            const role = response.data.role;
+            const roleRoutes = {
+                student: "/dashboard",
+                staff: "/staff/dashboard",
+                hod: "/hod/dashboard",
+                admin: "/admin/dashboard",
+                principal: "/principal/dashboard",
+            };
 
-            if (role === "Student") {
-                navigate("/dashboard");
-            } else if (role === "Staff") {
-                navigate("/staff/dashboard");
-            } else if (role === "HOD") {
-                navigate("/hod/dashboard");
-            } else if (role === "Admin") {
-                navigate("/admin/dashboard");
-            } else if (role === "Principal") {
-                navigate("/principal/dashboard");
-            } else {
-                setError("Invalid user role.");
-            }
+            navigate(roleRoutes[actualRole.toLowerCase()]);
         } catch (error) {
             console.log("Login error:", error.response?.data);
 
             if (error.response?.data) {
                 setError(
                     error.response.data.detail ||
-                    "Invalid username or password"
+                    error.response.data.non_field_errors?.[0] ||
+                    "Invalid username, password, or role."
                 );
             } else {
-                setError("Unable to connect to server");
+                setError("Unable to connect to server.");
             }
         } finally {
             setLoading(false);
@@ -369,8 +380,35 @@ function Login() {
                 )}
 
                 <form onSubmit={handleLogin}>
+
+                    {/* Select Role */}
                     <div className="form-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="role">
+                            Login As
+                        </label>
+
+                        <select
+                            id="role"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                            required
+                        >
+                            <option value="">
+                                Select your role
+                            </option>
+                            <option value="Student">Student</option>
+                            <option value="Staff">Staff</option>
+                            <option value="HOD">HOD</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Principal">Principal</option>
+                        </select>
+                    </div>
+
+                    {/* Username */}
+                    <div className="form-group">
+                        <label htmlFor="username">
+                            Username
+                        </label>
 
                         <input
                             id="username"
@@ -385,8 +423,11 @@ function Login() {
                         />
                     </div>
 
+                    {/* Password */}
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">
+                            Password
+                        </label>
 
                         <input
                             id="password"
@@ -408,6 +449,7 @@ function Login() {
                     >
                         {loading ? "Logging in..." : "Sign In"}
                     </button>
+
                 </form>
 
                 <p className="login-footer">
