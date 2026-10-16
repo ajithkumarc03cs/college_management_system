@@ -106,11 +106,13 @@ CORS_ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.environ.get(
         "CORS_ALLOWED_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173",
+        "http://localhost:5173,http://127.0.0.1:5173,https://college-management-system-six-alpha.vercel.app",
     ).split(",")
     if origin.strip()
 ]
+
 ROOT_URLCONF = 'config.urls'
+
 
 TEMPLATES = [
     {
