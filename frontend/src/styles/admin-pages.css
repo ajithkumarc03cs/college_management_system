@@ -3508,4 +3508,59 @@
         grid-template-columns: 1fr;
     }
 
+/* =========================================================
+   DEPARTMENT TABLE ALIGNMENT FIX
+========================================================= */
+
+.admin-departments-page .admin-table {
+    width: 100%;
+    min-width: 600px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+/* ID column */
+.admin-departments-page .admin-table th:nth-child(1),
+.admin-departments-page .admin-table td:nth-child(1) {
+    width: 12%;
+    text-align: left;
+}
+
+/* Department Name column */
+.admin-departments-page .admin-table th:nth-child(2),
+.admin-departments-page .admin-table td:nth-child(2) {
+    width: 43%;
+    text-align: left;
+}
+
+/* Action column */
+.admin-departments-page .admin-table th:nth-child(3),
+.admin-departments-page .admin-table td:nth-child(3) {
+    width: 45%;
+    text-align: left;
+}
+
+/* Consistent cell spacing */
+.admin-departments-page .admin-table th,
+.admin-departments-page .admin-table td {
+    padding: 16px 20px;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+/* Edit and Delete buttons */
+.admin-departments-page .admin-action-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.admin-departments-page .admin-action-group button {
+    margin: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
 }
