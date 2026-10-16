@@ -914,5 +914,14 @@
     .settings-cancel-btn {
         width: 100%;
     }
+    .admin-course-toolbar-actions {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
 
+    .admin-course-toolbar-actions button {
+        white-space: nowrap;
+    }
 }

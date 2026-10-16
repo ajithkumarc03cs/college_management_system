@@ -1,330 +1,210 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api/axios";
 import "./Courses.css";
 
 function Courses() {
-    // =========================================================
-    // STATE
-    // =========================================================
-
-    const [page, setPage] = useState(null);
+    const [courses, setCourses] = useState([]);
+    const [levels, setLevels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-
-    // =========================================================
-    // LOAD COURSES PAGE
-    // =========================================================
-
-    const loadCourses = async () => {
-        try {
-            setLoading(true);
-            setError("");
-
-            const response = await api.get("public/courses/");
-
-            setPage(response.data);
-        } catch (err) {
-            console.error("Failed to load courses page:", err);
-
-            setError(
-                err.response?.data?.detail ||
-                "Failed to load courses."
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
-
-
-    // =========================================================
-    // INITIAL LOAD
-    // =========================================================
-
     useEffect(() => {
+        const loadCourses = async () => {
+            try {
+                setLoading(true);
+                setError("");
+
+                const [coursesResponse, levelsResponse] =
+                    await Promise.all([
+                        api.get("courses/"),
+                        api.get("course-levels/"),
+                    ]);
+
+                const coursesData = coursesResponse.data;
+                const levelsData = levelsResponse.data;
+
+                setCourses(
+                    Array.isArray(coursesData)
+                        ? coursesData
+                        : coursesData.results || []
+                );
+
+                setLevels(
+                    Array.isArray(levelsData)
+                        ? levelsData
+                        : levelsData.results || []
+                );
+            } catch (err) {
+                console.error("Failed to load courses:", err);
+
+                setError(
+                    err.response?.data?.detail ||
+                    "Failed to load courses."
+                );
+            } finally {
+                setLoading(false);
+            }
+        };
+
         loadCourses();
     }, []);
 
+    const getLevelId = (course) => {
+        if (
+            course.level &&
+            typeof course.level === "object"
+        ) {
+            return course.level.id;
+        }
 
-    // =========================================================
-    // LOADING
-    // =========================================================
+        return course.level_id ?? course.level;
+    };
+
+    const getLevelName = (course) => {
+        if (
+            course.level &&
+            typeof course.level === "object"
+        ) {
+            return course.level.name || "Course";
+        }
+
+        const levelId = getLevelId(course);
+
+        return (
+            levels.find(
+                (level) =>
+                    Number(level.id) === Number(levelId)
+            )?.name ||
+            course.level_name ||
+            "Course"
+        );
+    };
 
     if (loading) {
         return (
-            <div className="public-courses">
-                <section className="courses-page-hero">
+            <main className="public-courses">
+                <section className="courses-list-section">
                     <div className="container">
-                        <span className="section-label">
-                            Academic Programs
-                        </span>
-
-                        <h1>Our Courses</h1>
-
-                        <p>
-                            Loading courses...
-                        </p>
+                        <p>Loading courses...</p>
                     </div>
                 </section>
-            </div>
+            </main>
         );
     }
-
-
-    // =========================================================
-    // ERROR
-    // =========================================================
 
     if (error) {
         return (
-            <div className="public-courses">
-                <section className="courses-page-hero">
+            <main className="public-courses">
+                <section className="courses-list-section">
                     <div className="container">
-                        <span className="section-label">
-                            Academic Programs
-                        </span>
-
                         <h1>Our Courses</h1>
-
-                        <p>
-                            {error}
-                        </p>
+                        <p role="alert">{error}</p>
                     </div>
                 </section>
-            </div>
+            </main>
         );
     }
 
-
-    // =========================================================
-    // NO DATA
-    // =========================================================
-
-    if (!page) {
-        return (
-            <div className="public-courses">
-                <section className="courses-page-hero">
-                    <div className="container">
-                        <span className="section-label">
-                            Academic Programs
-                        </span>
-
-                        <h1>Our Courses</h1>
-
-                        <p>
-                            Courses data not available.
-                        </p>
-                    </div>
-                </section>
-            </div>
-        );
-    }
-
-
-    // =========================================================
-    // COURSES
-    // =========================================================
-
-    const courses = (page.courses || [])
-        .filter((course) => course.is_active === true)
-        .sort((a, b) => a.order - b.order);
-
-
-    // =========================================================
-    // RENDER
-    // =========================================================
+    const groupedCourses = levels
+        .map((level) => ({
+            ...level,
+            courses: courses.filter(
+                (course) =>
+                    Number(getLevelId(course)) ===
+                    Number(level.id)
+            ),
+        }))
+        .filter((level) => level.courses.length > 0);
 
     return (
-        <div className="public-courses">
-
-            {/* =================================================
-                HERO
-            ================================================= */}
-
-            <section className="courses-page-hero">
+        <main className="public-courses">
+            <section
+                className="courses-list-section"
+                aria-labelledby="courses-heading"
+            >
                 <div className="container">
-
-                    <span className="section-label">
-                        {page.hero_label}
-                    </span>
-
-                    <h1>
-                        {page.hero_title}
-                    </h1>
-
-                    <p>
-                        {page.hero_description}
-                    </p>
-
-                </div>
-            </section>
-
-
-            {/* =================================================
-                INTRO
-            ================================================= */}
-
-            <section className="courses-intro-section">
-                <div className="container">
-
-                    <div className="section-heading">
-
-                        <span className="section-label">
-                            {page.intro_label}
-                        </span>
-
-                        <h2>
-                            {page.intro_title}
-                        </h2>
+                    
+                    <header className="courses-heading">
+                        <h1 id="courses-heading">
+                            Our Courses
+                        </h1>
 
                         <p>
-                            {page.intro_description}
+                            Explore our undergraduate and
+                            postgraduate programs.
                         </p>
-
-                    </div>
-
-                </div>
-            </section>
-
-
-            {/* =================================================
-                COURSES LIST
-            ================================================= */}
-
-            <section className="courses-list-section">
-                <div className="container">
+                    </header>
 
                     {courses.length === 0 ? (
-
+                        <div className="courses-empty">
+                            <p>No courses available.</p>
+                        </div>
+                    ) : groupedCourses.length === 0 ? (
                         <div className="courses-empty">
                             <p>
-                                No courses available.
+                                Course levels are not available
+                                for the current courses.
                             </p>
                         </div>
-
                     ) : (
+                        groupedCourses.map((level) => (
+                            <section
+                                className="course-level-section"
+                                key={level.id}
+                                aria-labelledby={`level-${level.id}`}
+                            >
+                                <h2 id={`level-${level.id}`}>
+                                    {level.name}
+                                </h2>
 
-                        <div className="public-course-grid">
+                                <div className="public-course-grid">
+                                    {level.courses.map((course) => (
+                                        <article
+                                            className="public-course-card"
+                                            key={course.id}
+                                        >
+                                            <div className="public-course-content">
+                                                <span className="course-type">
+                                                    {getLevelName(course)}
+                                                </span>
 
-                            {courses.map((course) => (
+                                                <h3>{course.name}</h3>
 
-                                <div
-                                    className="public-course-card"
-                                    key={course.id}
-                                >
+                                                {course.description && (
+                                                    <p>
+                                                        {course.description}
+                                                    </p>
+                                                )}
 
-                                    {/* COURSE IMAGE */}
+                                                <div className="course-details">
+                                                    <span>
+                                                        Code: {course.code}
+                                                    </span>
 
-                                    <div className="public-course-image">
+                                                    <span>
+                                                        Duration:{" "}
+                                                        {course.duration} years
+                                                    </span>
+                                                </div>
 
-                                        {course.image ? (
-
-                                           <img
-                                                src={`http://127.0.0.1:8000${course.image}`}
-                                                alt={course.name}
-                                            />
-
-                                        ) : (
-
-                                            <span>
-                                                Course Image
-                                            </span>
-
-                                        )}
-
-                                    </div>
-
-
-                                    {/* COURSE CONTENT */}
-
-                                    <div className="public-course-content">
-
-                                        <span className="course-type">
-                                            {course.course_type}
-                                        </span>
-
-
-                                        <h3>
-                                            {course.name}
-                                        </h3>
-
-
-                                        <p>
-                                            {course.description}
-                                        </p>
-
-
-                                        {/* COURSE DETAILS */}
-
-                                        <div className="course-details">
-
-                                            <span>
-                                                📚 {course.department}
-                                            </span>
-
-                                            <span>
-                                                ⏱ {course.duration}
-                                            </span>
-
-                                        </div>
-
-
-                                        {/* ENQUIRE */}
-
-                                    <Link to={`/course-application/${course.id}`}>
-                                        Apply Now →
-                                    </Link>
-
-                                    </div>
-
+                                                <Link
+                                                    to={`/course-application/${course.id}`}
+                                                >
+                                                    Apply Now →
+                                                </Link>
+                                            </div>
+                                        </article>
+                                    ))}
+                                    
                                 </div>
-
-                            ))}
-
-                        </div>
-
+                            </section>
+                        ))
                     )}
-
                 </div>
             </section>
-
-
-            {/* =================================================
-                CTA
-            ================================================= */}
-
-            <section className="courses-cta-section">
-                <div className="container">
-
-                    <div className="courses-cta">
-
-                        <div>
-
-                            <h2>
-                                {page.cta_title}
-                            </h2>
-
-                            <p>
-                                {page.cta_description}
-                            </p>
-
-                        </div>
-
-
-                        <Link
-                            to={page.cta_button_link}
-                            className="primary-btn"
-                        >
-                            {page.cta_button_text}
-                        </Link>
-
-                    </div>
-
-                </div>
-            </section>
-
-        </div>
+        </main>
     );
 }
 

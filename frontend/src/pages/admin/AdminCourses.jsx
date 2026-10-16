@@ -147,68 +147,40 @@ function AdminCourses() {
     // ========================================================
 
     const loadCoursesPage = async () => {
-
         try {
-
             setLoading(true);
-
             setError("");
 
-            const pageResponse =
-                await api.get(
-                    "admin/courses/"
-                );
+            // Existing page content API — unchanged
+            const pageResponse = await api.get("admin/courses/");
 
-            const coursesResponse =
-                await api.get(
-                    "admin/courses/items/"
-                );
+            // Academic courses API — academics_course table
+            const coursesResponse = await api.get("courses/");
 
-
-            // ==================================================
-            // PAGE DATA
-            // ==================================================
-
+            // Keep existing page content
             setPageData({
-
                 ...initialPageData,
-
                 ...(pageResponse.data || {}),
-
             });
 
+            // Handle normal array and paginated responses
+            const academicCourses = Array.isArray(coursesResponse.data)
+                ? coursesResponse.data
+                : coursesResponse.data?.results || [];
 
-            // ==================================================
-            // COURSE ITEMS
-            // ==================================================
-
-            setCourses(
-                Array.isArray(coursesResponse.data)
-                    ? coursesResponse.data
-                    : coursesResponse.data?.results || []
-            );
-
+            setCourses(academicCourses);
 
         } catch (err) {
-
-            console.error(
-                "Failed to load courses:",
-                err
-            );
+            console.error("Failed to load courses:", err);
 
             setError(
                 err.response?.data?.detail ||
                 "Failed to load courses."
             );
-
         } finally {
-
             setLoading(false);
-
         }
-
     };
-
 
     // ========================================================
     // PAGE INPUT CHANGE
@@ -1459,224 +1431,73 @@ function AdminCourses() {
 
                 </form>
 
-
-                {/* ==================================================
-                    COURSE LIST
-                ================================================== */}
-
-                <div className="settings-section">
-
-
-                    <div className="settings-list-header">
-
-                        <div>
-
-                            <h3>
-                                Existing Courses
-                            </h3>
-
-                            <p>
-                                {courses.length} course
-                                {courses.length !== 1
-                                    ? "s"
-                                    : ""
-                                }
-                            </p>
-
-                        </div>
-
+            <div className="settings-section">
+                <div className="settings-list-header">
+                    <div>
+                        <h3>Existing Academic Courses</h3>
+                        <p>
+                            {courses.length} course
+                            {courses.length !== 1 ? "s" : ""}
+                        </p>
                     </div>
-
-
-                    {courses.length === 0 ? (
-
-                        <div className="settings-empty">
-
-                            No courses added yet.
-
-                        </div>
-
-                    ) : (
-
-                        <div className="admin-course-list">
-
-
-                            {courses.map(
-                                (course) => (
-
-                                    <div
-                                        key={course.id}
-                                        className="admin-course-item"
-                                    >
-
-
-                                        {/* IMAGE */}
-
-                                        <div className="admin-course-image">
-
-                                            {course.image ? (
-
-                                                <img
-                                                    src={
-                                                        getImageUrl(
-                                                            course.image
-                                                        )
-                                                    }
-                                                    alt={
-                                                        course.name
-                                                    }
-                                                />
-
-                                            ) : (
-
-                                                <div className="admin-course-image-placeholder">
-
-                                                    📚
-
-                                                </div>
-
-                                            )}
-
-                                        </div>
-
-
-                                        {/* CONTENT */}
-
-                                        <div className="admin-course-content">
-
-                                            <div className="admin-course-top">
-
-                                                <div>
-
-                                                    <span className="admin-course-type">
-
-                                                        {course.course_type}
-
-                                                    </span>
-
-
-                                                    <h4>
-
-                                                        {course.name}
-
-                                                    </h4>
-
-                                                </div>
-
-
-                                                <span
-                                                    className={
-                                                        course.is_active
-                                                            ? "course-status active"
-                                                            : "course-status inactive"
-                                                    }
-                                                >
-
-                                                    {course.is_active
-                                                        ? "Active"
-                                                        : "Inactive"
-                                                    }
-
-                                                </span>
-
-                                            </div>
-
-
-                                            <div className="admin-course-meta">
-
-                                                <span>
-
-                                                    🏢{" "}
-
-                                                    {course.department}
-
-                                                </span>
-
-
-                                                <span>
-
-                                                    ⏱{" "}
-
-                                                    {course.duration}
-
-                                                </span>
-
-
-                                                <span>
-
-                                                    ↕{" "}
-
-                                                    Order:{" "}
-                                                    {course.order}
-
-                                                </span>
-
-                                            </div>
-
-
-                                            {course.description && (
-
-                                                <p className="admin-course-description">
-
-                                                    {course.description}
-
-                                                </p>
-
-                                            )}
-
-
-                                            {/* ACTIONS */}
-
-                                            <div className="admin-course-actions">
-
-
-                                                <button
-                                                    type="button"
-                                                    className="settings-edit-btn"
-                                                    onClick={() =>
-                                                        handleEdit(
-                                                            course
-                                                        )
-                                                    }
-                                                >
-
-                                                    Edit
-
-                                                </button>
-
-
-                                                <button
-                                                    type="button"
-                                                    className="settings-delete-btn"
-                                                    onClick={() =>
-                                                        handleDelete(
-                                                            course.id
-                                                        )
-                                                    }
-                                                >
-
-                                                    Delete
-
-                                                </button>
-
-
-                                            </div>
-
-
-                                        </div>
-
-
-                                    </div>
-
-                                )
-                            )}
-
-                        </div>
-
-                    )}
-
                 </div>
 
+                {courses.length === 0 ? (
+                    <div className="settings-empty">
+                        No academic courses found.
+                    </div>
+                ) : (
+                    <div className="admin-course-list">
+                        {courses.map((course) => {
+                            const levelName =
+                                typeof course.level === "object"
+                                    ? course.level?.name
+                                    : course.level_name;
+
+                            return (
+                                <div
+                                    key={course.id}
+                                    className="admin-course-item"
+                                >
+                                    <div className="admin-course-image">
+                                        <div className="admin-course-image-placeholder">
+                                            📚
+                                        </div>
+                                    </div>
+
+                                    <div className="admin-course-content">
+                                        <div className="admin-course-top">
+                                            <div>
+                                                <span className="admin-course-type">
+                                                    {levelName || "Course"}
+                                                </span>
+
+                                                <h4>{course.name}</h4>
+                                            </div>
+                                        </div>
+
+                                        <div className="admin-course-meta">
+                                            <span>
+                                                Code: {course.code || "-"}
+                                            </span>
+
+                                            <span>
+                                                Duration: {course.duration} Years
+                                            </span>
+                                        </div>
+
+                                        {course.description && (
+                                            <p className="admin-course-description">
+                                                {course.description}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
+            </div>
             </div>
 
 

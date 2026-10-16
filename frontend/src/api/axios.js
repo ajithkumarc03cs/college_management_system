@@ -1,3 +1,4 @@
+
 import axios from "axios";
 
 // ============================================================
@@ -8,11 +9,12 @@ const API_BASE_URL =
     import.meta.env.VITE_API_BASE_URL ||
     "https://college-management-system-4e5u.onrender.com/api/";
 
+// ============================================================
+// AXIOS INSTANCE
+// ============================================================
+
 const api = axios.create({
     baseURL: API_BASE_URL,
-    headers: {
-        "Content-Type": "application/json",
-    },
 });
 
 // ============================================================
@@ -23,6 +25,7 @@ api.interceptors.request.use(
     (config) => {
         const accessToken = localStorage.getItem("access");
 
+        // Add JWT access token
         if (
             accessToken &&
             !config.url?.includes("login/") &&
@@ -30,8 +33,34 @@ api.interceptors.request.use(
         ) {
             config.headers = config.headers || {};
 
-            config.headers.Authorization =
-                `Bearer ${accessToken}`;
+            config.headers.Authorization = `Bearer ${accessToken}`;
+        }
+
+        // FormData upload:
+        // Let Axios/browser set multipart boundary automatically.
+        if (
+            typeof FormData !== "undefined" &&
+            config.data instanceof FormData
+        ) {
+            if (config.headers?.delete) {
+                config.headers.delete("Content-Type");
+            }
+
+            delete config.headers["Content-Type"];
+            delete config.headers["content-type"];
+        } else if (config.data != null) {
+            // JSON requests
+            config.headers = config.headers || {};
+
+            if (config.headers.set) {
+                config.headers.set(
+                    "Content-Type",
+                    "application/json"
+                );
+            } else {
+                config.headers["Content-Type"] =
+                    "application/json";
+            }
         }
 
         return config;
@@ -102,15 +131,24 @@ api.interceptors.response.use(
             originalRequest.headers =
                 originalRequest.headers || {};
 
-            originalRequest.headers.Authorization =
-                `Bearer ${newAccessToken}`;
+            if (originalRequest.headers.set) {
+                originalRequest.headers.set(
+                    "Authorization",
+                    `Bearer ${newAccessToken}`
+                );
+            } else {
+                originalRequest.headers.Authorization =
+                    `Bearer ${newAccessToken}`;
+            }
 
-            // Retry the original API request
+            // Retry original request with refreshed token
+            // Request interceptor will preserve FormData handling
             return api(originalRequest);
         } catch (refreshError) {
             console.error(
                 "Refresh token failed:",
-                refreshError.response?.data || refreshError.message
+                refreshError.response?.data ||
+                    refreshError.message
             );
 
             localStorage.removeItem("access");

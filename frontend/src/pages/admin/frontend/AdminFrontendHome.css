@@ -384,3 +384,29 @@
     }
 
 }
+.hero-image-preview {
+    width: 100%;
+    max-width: 600px;
+    margin: 12px 0 16px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.hero-image-preview img {
+    display: block;
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group input[type="file"] {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+}

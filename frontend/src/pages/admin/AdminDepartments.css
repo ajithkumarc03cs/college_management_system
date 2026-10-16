@@ -1,0 +1,69 @@
+
+/* Department table container */
+.admin-departments-page .admin-table-card {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Table wrapper */
+.admin-departments-page .admin-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Table alignment */
+.admin-departments-page .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* Table headings and cells */
+.admin-departments-page .admin-table th,
+.admin-departments-page .admin-table td {
+    padding: 14px 18px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* ID column */
+.admin-departments-page .admin-table th:nth-child(1),
+.admin-departments-page .admin-table td:nth-child(1) {
+    width: 12%;
+}
+
+/* Department Name column */
+.admin-departments-page .admin-table th:nth-child(2),
+.admin-departments-page .admin-table td:nth-child(2) {
+    width: 58%;
+}
+
+/* Action column */
+.admin-departments-page .admin-table th:nth-child(3),
+.admin-departments-page .admin-table td:nth-child(3) {
+    width: 30%;
+}
+
+/* Edit and Delete buttons */
+.admin-departments-page .admin-action-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Prevent buttons from overlapping */
+.admin-departments-page .admin-action-group button {
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* Empty table message */
+.admin-departments-page .admin-empty-cell {
+    text-align: center !important;
+    padding: 24px !important;
+}

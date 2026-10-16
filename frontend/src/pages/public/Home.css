@@ -900,3 +900,27 @@ a {
     }
 
 }
+
+
+
+
+.hero-image {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.college-hero-image {
+    display: block;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+    .college-hero-image {
+        height: 260px;
+    }
+}
