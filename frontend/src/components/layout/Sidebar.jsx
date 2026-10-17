@@ -222,6 +222,7 @@ function Sidebar({ role }) {
             ["Staff", "/admin/staff", "👨‍🏫"],
             ["HOD", "/admin/hod", "👔"],
             ["Principal", "/admin/principal", "🏫"],
+            ["Course Levels", "/admin/course-levels", "🎓"],            
             ["Courses", "/admin/courses", "📚"],
             ["Departments", "/admin/departments", "🏢"],
             ["Subjects", "/admin/subjects", "📖"],

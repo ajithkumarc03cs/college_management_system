@@ -29,6 +29,11 @@ class Course(models.Model):
         on_delete=models.PROTECT
     )
 
+    department = models.ForeignKey(
+        "Department",
+        on_delete=models.PROTECT,
+    )
+
     duration = models.PositiveIntegerField()
 
     description = models.TextField(

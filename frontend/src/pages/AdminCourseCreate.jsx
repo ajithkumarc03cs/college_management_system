@@ -566,520 +566,834 @@
 
 
 
+// import { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+
+// import api from "../api/axios";
+
+
+// function AdminCourseCreate() {
+
+//     const navigate = useNavigate();
+
+
+//     // ========================================================
+//     // OPTIONS
+//     // ========================================================
+
+//     const [levels, setLevels] = useState([]);
+
+
+//     // ========================================================
+//     // FORM DATA
+//     // ========================================================
+
+//     const [formData, setFormData] = useState({
+//         name: "",
+//         code: "",
+//         level: "",
+//         duration: "",
+//         description: ""
+//     });
+
+
+//     // ========================================================
+//     // UI STATE
+//     // ========================================================
+
+//     const [loading, setLoading] = useState(false);
+
+//     const [error, setError] = useState("");
+//     const [success, setSuccess] = useState("");
+
+
+//     // ========================================================
+//     // LOAD COURSE LEVELS
+//     // ========================================================
+
+//     useEffect(() => {
+
+//         loadLevels();
+
+//     }, []);
+
+
+//     const loadLevels = async () => {
+
+//         try {
+
+//             const response =
+//                 await api.get("course-levels/");
+
+
+//             const data =
+//                 response.data.results ||
+//                 response.data;
+
+
+//             setLevels(data);
+
+//         } catch (error) {
+
+//             console.log(
+//                 "Course Level Error:",
+//                 error.response?.data
+//             );
+
+//             setError(
+//                 "Unable to load course levels."
+//             );
+
+//         }
+//     };
+
+
+//     // ========================================================
+//     // HANDLE INPUT
+//     // ========================================================
+
+//     const handleChange = (e) => {
+
+//         const { name, value } = e.target;
+
+
+//         setFormData((previous) => ({
+//             ...previous,
+//             [name]: value
+//         }));
+
+//     };
+
+
+//     // ========================================================
+//     // CREATE COURSE
+//     // ========================================================
+
+//     const handleSubmit = async (e) => {
+
+//         e.preventDefault();
+
+//         setError("");
+//         setSuccess("");
+
+
+//         // ====================================================
+//         // VALIDATION
+//         // ====================================================
+
+//         if (!formData.name.trim()) {
+
+//             setError(
+//                 "Course name is required."
+//             );
+
+//             return;
+//         }
+
+
+//         if (!formData.code.trim()) {
+
+//             setError(
+//                 "Course code is required."
+//             );
+
+//             return;
+//         }
+
+
+//         if (!formData.level) {
+
+//             setError(
+//                 "Please select course level."
+//             );
+
+//             return;
+//         }
+
+
+//         if (!formData.duration) {
+
+//             setError(
+//                 "Course duration is required."
+//             );
+
+//             return;
+//         }
+
+
+//         if (Number(formData.duration) <= 0) {
+
+//             setError(
+//                 "Duration must be greater than 0."
+//             );
+
+//             return;
+//         }
+
+
+//         // ====================================================
+//         // API REQUEST
+//         // ====================================================
+
+//         try {
+
+//             setLoading(true);
+
+
+//             const response =
+//                 await api.post(
+//                     "courses/",
+//                     {
+//                         name:
+//                             formData.name,
+
+//                         code:
+//                             formData.code,
+
+//                         level:
+//                             Number(
+//                                 formData.level
+//                             ),
+
+//                         duration:
+//                             Number(
+//                                 formData.duration
+//                             ),
+
+//                         description:
+//                             formData.description
+//                     }
+//                 );
+
+
+//             console.log(
+//                 "Course Created:",
+//                 response.data
+//             );
+
+
+//             setSuccess(
+//                 "Course created successfully."
+//             );
+
+
+//             // =================================================
+//             // RESET FORM
+//             // =================================================
+
+//             setFormData({
+//                 name: "",
+//                 code: "",
+//                 level: "",
+//                 duration: "",
+//                 description: ""
+//             });
+
+//         } catch (error) {
+
+//             console.log(
+//                 "Create Course Error:",
+//                 error.response?.data
+//             );
+
+
+//             const data =
+//                 error.response?.data;
+
+
+//             if (data?.name) {
+
+//                 setError(
+//                     Array.isArray(data.name)
+//                         ? data.name[0]
+//                         : data.name
+//                 );
+
+//             } else if (data?.code) {
+
+//                 setError(
+//                     Array.isArray(data.code)
+//                         ? data.code[0]
+//                         : data.code
+//                 );
+
+//             } else if (data?.level) {
+
+//                 setError(
+//                     Array.isArray(data.level)
+//                         ? data.level[0]
+//                         : data.level
+//                 );
+
+//             } else if (data?.duration) {
+
+//                 setError(
+//                     Array.isArray(data.duration)
+//                         ? data.duration[0]
+//                         : data.duration
+//                 );
+
+//             } else {
+
+//                 setError(
+//                     "Unable to create course."
+//                 );
+
+//             }
+
+//         } finally {
+
+//             setLoading(false);
+
+//         }
+//     };
+
+
+//     // ========================================================
+//     // BACK
+//     // ========================================================
+
+//     const handleBack = () => {
+
+//         navigate("/admin/courses");
+
+//     };
+
+
+//     // ========================================================
+//     // RENDER
+//     // ========================================================
+
+//     return (
+
+//         <div className="admin-page admin-course-create-page">
+
+//             {/* ================================================= */}
+//             {/* PAGE HEADER */}
+//             {/* ================================================= */}
+
+//             <div className="admin-page-header">
+
+//                 <div>
+
+//                     <h1>
+//                         Add Course
+//                     </h1>
+
+//                     <p>
+//                         Create a new course.
+//                     </p>
+
+//                 </div>
+
+//             </div>
+
+
+//             {/* ================================================= */}
+//             {/* ALERTS */}
+//             {/* ================================================= */}
+
+//             {error && (
+
+//                 <div className="admin-alert admin-alert-error">
+//                     {error}
+//                 </div>
+
+//             )}
+
+
+//             {success && (
+
+//                 <div className="admin-alert admin-alert-success">
+//                     {success}
+//                 </div>
+
+//             )}
+
+
+//             {/* ================================================= */}
+//             {/* FORM */}
+//             {/* ================================================= */}
+
+//             <section className="admin-form-card">
+
+//                 <form onSubmit={handleSubmit}>
+
+//                     {/* ========================================= */}
+//                     {/* COURSE NAME */}
+//                     {/* ========================================= */}
+
+//                     <div className="admin-form-group">
+
+//                         <label htmlFor="course-name">
+//                             Course Name
+//                         </label>
+
+//                         <input
+//                             id="course-name"
+//                             type="text"
+//                             name="name"
+//                             value={formData.name}
+//                             onChange={handleChange}
+//                             placeholder="Enter course name"
+//                         />
+
+//                     </div>
+
+
+//                     {/* ========================================= */}
+//                     {/* COURSE CODE */}
+//                     {/* ========================================= */}
+
+//                     <div className="admin-form-group">
+
+//                         <label htmlFor="course-code">
+//                             Course Code
+//                         </label>
+
+//                         <input
+//                             id="course-code"
+//                             type="text"
+//                             name="code"
+//                             value={formData.code}
+//                             onChange={handleChange}
+//                             placeholder="Enter course code"
+//                         />
+
+//                     </div>
+
+
+//                     {/* ========================================= */}
+//                     {/* COURSE LEVEL */}
+//                     {/* ========================================= */}
+
+//                     <div className="admin-form-group">
+
+//                         <label htmlFor="course-level">
+//                             Course Level
+//                         </label>
+
+//                         <select
+//                             id="course-level"
+//                             name="level"
+//                             value={formData.level}
+//                             onChange={handleChange}
+//                         >
+
+//                             <option value="">
+//                                 Select Level
+//                             </option>
+
+
+//                             {levels.map((level) => (
+
+//                                 <option
+//                                     key={level.id}
+//                                     value={level.id}
+//                                 >
+//                                     {level.name}
+//                                 </option>
+
+//                             ))}
+
+//                         </select>
+
+//                     </div>
+
+
+//                     {/* ========================================= */}
+//                     {/* DURATION */}
+//                     {/* ========================================= */}
+
+//                     <div className="admin-form-group">
+
+//                         <label htmlFor="course-duration">
+//                             Duration (Years)
+//                         </label>
+
+//                         <input
+//                             id="course-duration"
+//                             type="number"
+//                             name="duration"
+//                             value={formData.duration}
+//                             onChange={handleChange}
+//                             min="1"
+//                             placeholder="Example: 3"
+//                         />
+
+//                     </div>
+
+
+//                     {/* ========================================= */}
+//                     {/* DESCRIPTION */}
+//                     {/* ========================================= */}
+
+//                     <div className="admin-form-group">
+
+//                         <label htmlFor="course-description">
+//                             Description
+//                         </label>
+
+//                         <textarea
+//                             id="course-description"
+//                             name="description"
+//                             value={formData.description}
+//                             onChange={handleChange}
+//                             placeholder="Enter course description"
+//                             rows="4"
+//                         />
+
+//                     </div>
+
+
+//                     {/* ========================================= */}
+//                     {/* ACTIONS */}
+//                     {/* ========================================= */}
+
+//                     <div className="admin-form-actions">
+
+//                         <button
+//                             type="submit"
+//                             className="admin-primary-btn"
+//                             disabled={loading}
+//                         >
+//                             {loading
+//                                 ? "Creating..."
+//                                 : "Create Course"}
+//                         </button>
+
+
+//                         <button
+//                             type="button"
+//                             className="admin-secondary-btn"
+//                             onClick={handleBack}
+//                         >
+//                             Back
+//                         </button>
+
+//                     </div>
+
+//                 </form>
+
+//             </section>
+
+//         </div>
+//     );
+// }
+
+
+// export default AdminCourseCreate;
+
+
+
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import api from "../api/axios";
 
-
 function AdminCourseCreate() {
-
     const navigate = useNavigate();
 
-
-    // ========================================================
-    // OPTIONS
-    // ========================================================
-
     const [levels, setLevels] = useState([]);
-
-
-    // ========================================================
-    // FORM DATA
-    // ========================================================
+    const [departments, setDepartments] = useState([]);
 
     const [formData, setFormData] = useState({
         name: "",
         code: "",
         level: "",
+        department: "",
         duration: "",
         description: ""
     });
 
-
-    // ========================================================
-    // UI STATE
-    // ========================================================
-
     const [loading, setLoading] = useState(false);
-
+    const [optionsLoading, setOptionsLoading] = useState(true);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-
-    // ========================================================
-    // LOAD COURSE LEVELS
-    // ========================================================
-
+    // Load course levels and departments
     useEffect(() => {
+        const loadOptions = async () => {
+            try {
+                const [levelsResponse, departmentsResponse] =
+                    await Promise.all([
+                        api.get("course-levels/"),
+                        api.get("departments/")
+                    ]);
 
-        loadLevels();
+                setLevels(
+                    levelsResponse.data.results ||
+                    levelsResponse.data
+                );
 
+                setDepartments(
+                    departmentsResponse.data.results ||
+                    departmentsResponse.data
+                );
+            } catch (err) {
+                console.error(
+                    "Loading dropdown options failed:",
+                    err.response?.data || err.message
+                );
+
+                setError(
+                    "Unable to load course levels or departments."
+                );
+            } finally {
+                setOptionsLoading(false);
+            }
+        };
+
+        loadOptions();
     }, []);
 
-
-    const loadLevels = async () => {
-
-        try {
-
-            const response =
-                await api.get("course-levels/");
-
-
-            const data =
-                response.data.results ||
-                response.data;
-
-
-            setLevels(data);
-
-        } catch (error) {
-
-            console.log(
-                "Course Level Error:",
-                error.response?.data
-            );
-
-            setError(
-                "Unable to load course levels."
-            );
-
-        }
-    };
-
-
-    // ========================================================
-    // HANDLE INPUT
-    // ========================================================
-
+    // Handle input changes
     const handleChange = (e) => {
-
         const { name, value } = e.target;
-
 
         setFormData((previous) => ({
             ...previous,
             [name]: value
         }));
-
     };
 
-
-    // ========================================================
-    // CREATE COURSE
-    // ========================================================
-
+    // Create course
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
         setError("");
         setSuccess("");
 
-
-        // ====================================================
-        // VALIDATION
-        // ====================================================
-
         if (!formData.name.trim()) {
-
-            setError(
-                "Course name is required."
-            );
-
+            setError("Course name is required.");
             return;
         }
-
 
         if (!formData.code.trim()) {
-
-            setError(
-                "Course code is required."
-            );
-
+            setError("Course code is required.");
             return;
         }
-
 
         if (!formData.level) {
-
-            setError(
-                "Please select course level."
-            );
-
+            setError("Please select course level.");
             return;
         }
 
-
-        if (!formData.duration) {
-
-            setError(
-                "Course duration is required."
-            );
-
+        if (!formData.department) {
+            setError("Please select department.");
             return;
         }
 
-
-        if (Number(formData.duration) <= 0) {
-
-            setError(
-                "Duration must be greater than 0."
-            );
-
+        if (
+            !formData.duration ||
+            Number(formData.duration) < 1
+        ) {
+            setError("Duration must be at least 1 year.");
             return;
         }
-
-
-        // ====================================================
-        // API REQUEST
-        // ====================================================
 
         try {
-
             setLoading(true);
 
+            const response = await api.post("courses/", {
+                name: formData.name.trim(),
+                code: formData.code.trim(),
+                level: Number(formData.level),
+                department: Number(formData.department),
+                duration: Number(formData.duration),
+                description: formData.description.trim()
+            });
 
-            const response =
-                await api.post(
-                    "courses/",
-                    {
-                        name:
-                            formData.name,
+            console.log("Course created:", response.data);
 
-                        code:
-                            formData.code,
-
-                        level:
-                            Number(
-                                formData.level
-                            ),
-
-                        duration:
-                            Number(
-                                formData.duration
-                            ),
-
-                        description:
-                            formData.description
-                    }
-                );
-
-
-            console.log(
-                "Course Created:",
-                response.data
-            );
-
-
-            setSuccess(
-                "Course created successfully."
-            );
-
-
-            // =================================================
-            // RESET FORM
-            // =================================================
+            setSuccess("Course created successfully.");
 
             setFormData({
                 name: "",
                 code: "",
                 level: "",
+                department: "",
                 duration: "",
                 description: ""
             });
-
-        } catch (error) {
-
-            console.log(
-                "Create Course Error:",
-                error.response?.data
+        } catch (err) {
+            console.error(
+                "Create course error:",
+                err.response?.data || err.message
             );
 
+            const data = err.response?.data;
 
-            const data =
-                error.response?.data;
+            if (data && typeof data === "object") {
+                const firstError = Object.values(data)
+                    .flat(Infinity)
+                    .find((item) => typeof item === "string");
 
-
-            if (data?.name) {
-
-                setError(
-                    Array.isArray(data.name)
-                        ? data.name[0]
-                        : data.name
-                );
-
-            } else if (data?.code) {
-
-                setError(
-                    Array.isArray(data.code)
-                        ? data.code[0]
-                        : data.code
-                );
-
-            } else if (data?.level) {
-
-                setError(
-                    Array.isArray(data.level)
-                        ? data.level[0]
-                        : data.level
-                );
-
-            } else if (data?.duration) {
-
-                setError(
-                    Array.isArray(data.duration)
-                        ? data.duration[0]
-                        : data.duration
-                );
-
+                setError(firstError || "Unable to create course.");
             } else {
-
-                setError(
-                    "Unable to create course."
-                );
-
+                setError("Unable to create course.");
             }
-
         } finally {
-
             setLoading(false);
-
         }
     };
 
-
-    // ========================================================
-    // BACK
-    // ========================================================
-
-    const handleBack = () => {
-
-        navigate("/admin/courses");
-
-    };
-
-
-    // ========================================================
-    // RENDER
-    // ========================================================
-
     return (
-
         <div className="admin-page admin-course-create-page">
-
-            {/* ================================================= */}
-            {/* PAGE HEADER */}
-            {/* ================================================= */}
-
             <div className="admin-page-header">
-
                 <div>
-
-                    <h1>
-                        Add Course
-                    </h1>
-
-                    <p>
-                        Create a new course.
-                    </p>
-
+                    <h1>Add Course</h1>
+                    <p>Create a new academic course.</p>
                 </div>
-
             </div>
 
-
-            {/* ================================================= */}
-            {/* ALERTS */}
-            {/* ================================================= */}
-
             {error && (
-
                 <div className="admin-alert admin-alert-error">
                     {error}
                 </div>
-
             )}
 
-
             {success && (
-
                 <div className="admin-alert admin-alert-success">
                     {success}
                 </div>
-
             )}
 
-
-            {/* ================================================= */}
-            {/* FORM */}
-            {/* ================================================= */}
-
             <section className="admin-form-card">
+                {optionsLoading ? (
+                    <p>Loading course levels and departments...</p>
+                ) : (
+                    <form onSubmit={handleSubmit}>
+                        <div className="admin-form-group">
+                            <label htmlFor="course-name">
+                                Course Name
+                            </label>
+                            <input
+                                id="course-name"
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                placeholder="Example: BSc Computer Science"
+                                required
+                            />
+                        </div>
 
-                <form onSubmit={handleSubmit}>
+                        <div className="admin-form-group">
+                            <label htmlFor="course-code">
+                                Course Code
+                            </label>
+                            <input
+                                id="course-code"
+                                type="text"
+                                name="code"
+                                value={formData.code}
+                                onChange={handleChange}
+                                placeholder="Example: BSCCS"
+                                required
+                            />
+                        </div>
 
-                    {/* ========================================= */}
-                    {/* COURSE NAME */}
-                    {/* ========================================= */}
+                        <div className="admin-form-group">
+                            <label htmlFor="course-level">
+                                Course Type / Level
+                            </label>
+                            <select
+                                id="course-level"
+                                name="level"
+                                value={formData.level}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Select Course Type</option>
 
-                    <div className="admin-form-group">
+                                {levels.map((level) => (
+                                    <option
+                                        key={level.id}
+                                        value={level.id}
+                                    >
+                                        {level.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                        <label htmlFor="course-name">
-                            Course Name
-                        </label>
+                        <div className="admin-form-group">
+                            <label htmlFor="course-department">
+                                Department
+                            </label>
+                            <select
+                                id="course-department"
+                                name="department"
+                                value={formData.department}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Select Department</option>
 
-                        <input
-                            id="course-name"
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            placeholder="Enter course name"
-                        />
+                                {departments.map((department) => (
+                                    <option
+                                        key={department.id}
+                                        value={department.id}
+                                    >
+                                        {department.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                    </div>
+                        <div className="admin-form-group">
+                            <label htmlFor="course-duration">
+                                Duration (Years)
+                            </label>
+                            <input
+                                id="course-duration"
+                                type="number"
+                                name="duration"
+                                value={formData.duration}
+                                onChange={handleChange}
+                                min="1"
+                                placeholder="Example: 3"
+                                required
+                            />
+                        </div>
 
+                        <div className="admin-form-group">
+                            <label htmlFor="course-description">
+                                Description
+                            </label>
+                            <textarea
+                                id="course-description"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                                placeholder="Enter course description"
+                                rows="4"
+                            />
+                        </div>
 
-                    {/* ========================================= */}
-                    {/* COURSE CODE */}
-                    {/* ========================================= */}
+                        <div className="admin-form-actions">
+                            <button
+                                type="submit"
+                                className="admin-primary-btn"
+                                disabled={loading}
+                            >
+                                {loading ? "Creating..." : "Create Course"}
+                            </button>
 
-                    <div className="admin-form-group">
-
-                        <label htmlFor="course-code">
-                            Course Code
-                        </label>
-
-                        <input
-                            id="course-code"
-                            type="text"
-                            name="code"
-                            value={formData.code}
-                            onChange={handleChange}
-                            placeholder="Enter course code"
-                        />
-
-                    </div>
-
-
-                    {/* ========================================= */}
-                    {/* COURSE LEVEL */}
-                    {/* ========================================= */}
-
-                    <div className="admin-form-group">
-
-                        <label htmlFor="course-level">
-                            Course Level
-                        </label>
-
-                        <select
-                            id="course-level"
-                            name="level"
-                            value={formData.level}
-                            onChange={handleChange}
-                        >
-
-                            <option value="">
-                                Select Level
-                            </option>
-
-
-                            {levels.map((level) => (
-
-                                <option
-                                    key={level.id}
-                                    value={level.id}
-                                >
-                                    {level.name}
-                                </option>
-
-                            ))}
-
-                        </select>
-
-                    </div>
-
-
-                    {/* ========================================= */}
-                    {/* DURATION */}
-                    {/* ========================================= */}
-
-                    <div className="admin-form-group">
-
-                        <label htmlFor="course-duration">
-                            Duration (Years)
-                        </label>
-
-                        <input
-                            id="course-duration"
-                            type="number"
-                            name="duration"
-                            value={formData.duration}
-                            onChange={handleChange}
-                            min="1"
-                            placeholder="Example: 3"
-                        />
-
-                    </div>
-
-
-                    {/* ========================================= */}
-                    {/* DESCRIPTION */}
-                    {/* ========================================= */}
-
-                    <div className="admin-form-group">
-
-                        <label htmlFor="course-description">
-                            Description
-                        </label>
-
-                        <textarea
-                            id="course-description"
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            placeholder="Enter course description"
-                            rows="4"
-                        />
-
-                    </div>
-
-
-                    {/* ========================================= */}
-                    {/* ACTIONS */}
-                    {/* ========================================= */}
-
-                    <div className="admin-form-actions">
-
-                        <button
-                            type="submit"
-                            className="admin-primary-btn"
-                            disabled={loading}
-                        >
-                            {loading
-                                ? "Creating..."
-                                : "Create Course"}
-                        </button>
-
-
-                        <button
-                            type="button"
-                            className="admin-secondary-btn"
-                            onClick={handleBack}
-                        >
-                            Back
-                        </button>
-
-                    </div>
-
-                </form>
-
+                            <button
+                                type="button"
+                                className="admin-secondary-btn"
+                                onClick={() => navigate("/admin/courses")}
+                            >
+                                Back
+                            </button>
+                        </div>
+                    </form>
+                )}
             </section>
-
         </div>
     );
 }
-
 
 export default AdminCourseCreate;

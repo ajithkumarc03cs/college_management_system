@@ -1,0 +1,230 @@
+/* AdminCourseEdit.css */
+
+.admin-course-edit-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+    box-sizing: border-box;
+    color: #1f2937;
+}
+
+/* Page heading */
+.admin-course-edit-page .admin-page-header {
+    margin-bottom: 24px;
+}
+
+.admin-course-edit-page .admin-page-header h1 {
+    margin: 0 0 8px;
+    color: #111827;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.admin-course-edit-page .admin-page-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Error message */
+.admin-course-edit-page .admin-alert-error {
+    margin-bottom: 20px;
+    padding: 13px 16px;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    background: #fef2f2;
+    color: #b91c1c;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Form card */
+.admin-course-edit-page .admin-form-card {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.05);
+}
+
+/* Form fields */
+.admin-course-edit-page .admin-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.admin-course-edit-page .admin-form-group label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.admin-course-edit-page .admin-form-group input,
+.admin-course-edit-page .admin-form-group select,
+.admin-course-edit-page .admin-form-group textarea {
+    width: 100%;
+    padding: 12px 13px;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #111827;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-course-edit-page .admin-form-group input,
+.admin-course-edit-page .admin-form-group select {
+    min-height: 44px;
+}
+
+.admin-course-edit-page .admin-form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.admin-course-edit-page .admin-form-group input:focus,
+.admin-course-edit-page .admin-form-group select:focus,
+.admin-course-edit-page .admin-form-group textarea:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.admin-course-edit-page .admin-form-group input::placeholder,
+.admin-course-edit-page .admin-form-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* Duration input and Years suffix */
+.admin-course-edit-page .admin-input-with-suffix {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-course-edit-page .admin-input-with-suffix input {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-course-edit-page .admin-input-with-suffix span {
+    flex-shrink: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Description occupies full row */
+.admin-course-edit-page .admin-form-group:has(textarea) {
+    grid-column: 1 / -1;
+}
+
+/* Buttons */
+.admin-course-edit-page .admin-form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    grid-column: 1 / -1;
+    margin-top: 4px;
+}
+
+.admin-course-edit-page .admin-primary-btn,
+.admin-course-edit-page .admin-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    padding: 11px 20px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.admin-course-edit-page .admin-primary-btn {
+    background: #4f46e5;
+    color: #ffffff;
+}
+
+.admin-course-edit-page .admin-primary-btn:hover {
+    background: #4338ca;
+}
+
+.admin-course-edit-page .admin-secondary-btn {
+    border-color: #d1d5db;
+    background: #ffffff;
+    color: #374151;
+}
+
+.admin-course-edit-page .admin-secondary-btn:hover {
+    background: #f3f4f6;
+}
+
+.admin-course-edit-page button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Loading */
+.admin-course-edit-page .admin-loading-state {
+    padding: 40px 20px;
+    color: #6b7280;
+    text-align: center;
+    font-size: 15px;
+}
+
+/* Tablet and mobile */
+@media (max-width: 768px) {
+    .admin-course-edit-page {
+        padding: 18px;
+    }
+
+    .admin-course-edit-page .admin-form-card {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 20px;
+    }
+
+    .admin-course-edit-page .admin-form-group:has(textarea) {
+        grid-column: 1;
+    }
+
+    .admin-course-edit-page .admin-page-header h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-course-edit-page {
+        padding: 12px;
+    }
+
+    .admin-course-edit-page .admin-form-card {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .admin-course-edit-page .admin-page-header h1 {
+        font-size: 22px;
+    }
+
+    .admin-course-edit-page .admin-form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-course-edit-page .admin-primary-btn,
+    .admin-course-edit-page .admin-secondary-btn {
+        width: 100%;
+    }
+}

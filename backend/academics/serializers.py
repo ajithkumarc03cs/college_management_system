@@ -39,6 +39,11 @@ class CourseSerializer(serializers.ModelSerializer):
         read_only=True
     )
 
+    department_name = serializers.CharField(
+        source="department.name",
+        read_only=True
+    )
+
     class Meta:
         model = Course
 
@@ -48,6 +53,8 @@ class CourseSerializer(serializers.ModelSerializer):
             "code",
             "level",
             "level_name",
+            "department",
+            "department_name",
             "duration",
             "description",
         ]
@@ -55,6 +62,7 @@ class CourseSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "level_name",
+            "department_name",
         ]
 
     def validate_duration(self, value):
@@ -65,8 +73,6 @@ class CourseSerializer(serializers.ModelSerializer):
             )
 
         return value
-
-
 # ========================================
 # DEPARTMENT
 # ========================================

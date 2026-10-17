@@ -119,7 +119,7 @@ import PrincipalSubjects from "./pages/principal/PrincipalSubjects";
 import PrincipalExams from "./pages/principal/PrincipalExams";
 import PrincipalAssignments from "./pages/principal/PrincipalAssignments";
 import PrincipalAttendance from "./pages/principal/PrincipalAttendance";
-
+import AdminCourseLevels from "./pages/admin/AdminCourseLevels";
 
 // ============================================================
 // COMMON LOGIN / ADMIN / STUDENT LAYOUT
@@ -985,6 +985,16 @@ function App() {
                         </Layout>
                     }
                 />       
+               
+                <Route
+                    path="/admin/course-levels"
+                    element={
+                        <Layout role="Admin">
+                            <AdminCourseLevels />
+                        </Layout>
+                    }
+                />
+
             </Routes>
 
         </BrowserRouter>
