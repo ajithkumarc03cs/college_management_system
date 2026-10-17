@@ -150,5 +150,21 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
+    .admin-home-hero-wrapper {
+        width: 100%;
+        min-width: 0;
+        overflow: visible;
+    }
 
+    .admin-home-hero-wrapper img {
+        max-width: 100%;
+    }
+
+    .admin-home-main,
+    .admin-home-section-content {
+        min-width: 0;
+    }
 }
+
+
+

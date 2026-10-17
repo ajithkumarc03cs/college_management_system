@@ -18,6 +18,25 @@ function AdminFrontendHome() {
     const [aboutImageFile, setAboutImageFile] = useState(null);
     const [aboutImagePreview, setAboutImagePreview] = useState("");
 
+    const getImageUrl = (imageUrl) => {
+        if (!imageUrl) return "";
+
+        // Newly selected local preview
+        if (imageUrl.startsWith("blob:")) {
+            return imageUrl;
+        }
+
+        // Already an absolute URL
+        if (imageUrl.startsWith("http://") ||
+            imageUrl.startsWith("https://")) {
+            return imageUrl;
+        }
+
+        // Django backend media path
+        const backendUrl = "http://127.0.0.1:8000";
+
+        return `${backendUrl}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
+    };
     // Load existing home page data
     const loadHome = async () => {
         try {
@@ -148,11 +167,23 @@ function AdminFrontendHome() {
             if (aboutImageFile) {
                 payload.append("about_image", aboutImageFile);
             }
+            console.log("Hero image:", heroImageFile);
+            console.log("About image:", aboutImageFile);
 
+            for (const [key, value] of payload.entries()) {
+                console.log(
+                    key,
+                    value instanceof File
+                        ? `${value.name} (${value.size} bytes)`
+                        : value
+                );
+            }
             const response = await api.patch(
                 "admin/home/",
                 payload
             );
+            console.log("Saved home response:", response.data);
+
 
             setHome(response.data);
 
@@ -363,16 +394,21 @@ function AdminFrontendHome() {
                             </label>
 
                             {(heroImagePreview || home.hero_image) && (
-                                <div className="hero-image-preview">
-                                    <img
-                                        src={
-                                            heroImagePreview ||
-                                            home.hero_image
-                                        }
-                                        alt="Hero preview"
-                                    />
-                                </div>
-                            )}
+                                    <div className="hero-image-preview">
+                                        <img
+                                            src={getImageUrl(
+                                                heroImagePreview || home.hero_image
+                                            )}
+                                            alt="Hero preview"
+                                            onError={(e) => {
+                                                console.error(
+                                                    "Hero image failed to load:",
+                                                    e.currentTarget.src
+                                                );
+                                            }}
+                                        />
+                                    </div>
+                                )}
 
                             <input
                                 id="hero_image"
@@ -461,15 +497,19 @@ function AdminFrontendHome() {
                             {(aboutImagePreview || home.about_image) && (
                                 <div className="hero-image-preview">
                                     <img
-                                        src={
-                                            aboutImagePreview ||
-                                            home.about_image
-                                        }
+                                        src={getImageUrl(
+                                            aboutImagePreview || home.about_image
+                                        )}
                                         alt="About section preview"
+                                        onError={(e) => {
+                                            console.error(
+                                                "About image failed to load:",
+                                                e.currentTarget.src
+                                            );
+                                        }}
                                     />
                                 </div>
                             )}
-
                             <input
                                 id="about_image"
                                 type="file"
