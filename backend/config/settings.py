@@ -91,8 +91,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -106,10 +106,16 @@ CORS_ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.environ.get(
         "CORS_ALLOWED_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173,https://college-management-system-six-alpha.vercel.app",
+        (
+            "http://localhost:5173,"
+            "http://127.0.0.1:5173,"
+            "https://college-management-system-six-alpha.vercel.app,"
+            "https://college-management-system-1z1e4lfvb-collegemanagementsystem.vercel.app"
+        ),
     ).split(",")
     if origin.strip()
 ]
+
 
 ROOT_URLCONF = 'config.urls'
 
