@@ -21,21 +21,17 @@ function AdminFrontendHome() {
     const getImageUrl = (imageUrl) => {
         if (!imageUrl) return "";
 
-        // Newly selected local preview
-        if (imageUrl.startsWith("blob:")) {
+        if (
+            imageUrl.startsWith("blob:") ||
+            imageUrl.startsWith("http://") ||
+            imageUrl.startsWith("https://")
+        ) {
             return imageUrl;
         }
 
-        // Already an absolute URL
-        if (imageUrl.startsWith("http://") ||
-            imageUrl.startsWith("https://")) {
-            return imageUrl;
-        }
+        const backendUrl = api.defaults.baseURL.replace(/\/api\/?$/, "");
 
-        // Django backend media path
-        const backendUrl = "http://127.0.0.1:8000";
-
-        return `${backendUrl}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
+        return `${backendUrl}/${imageUrl.replace(/^\/+/, "")}`;
     };
     // Load existing home page data
     const loadHome = async () => {
