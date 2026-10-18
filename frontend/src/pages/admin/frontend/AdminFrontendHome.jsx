@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import api from "../../../api/axios";
 import "./AdminFrontendHome.css";
 
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+
 function AdminFrontendHome() {
     const [home, setHome] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -10,44 +12,32 @@ function AdminFrontendHome() {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
 
-    // Hero image
     const [heroImageFile, setHeroImageFile] = useState(null);
     const [heroImagePreview, setHeroImagePreview] = useState("");
 
-    // About image
     const [aboutImageFile, setAboutImageFile] = useState(null);
     const [aboutImagePreview, setAboutImagePreview] = useState("");
 
+    // Convert relative image paths to backend URLs.
     const getImageUrl = (imageUrl) => {
         if (!imageUrl) return "";
 
         if (
             imageUrl.startsWith("blob:") ||
             imageUrl.startsWith("http://") ||
-            imageUrl.startsWith("https://")
+            imageUrl.startsWith("https://") ||
+            imageUrl.startsWith("data:")
         ) {
             return imageUrl;
         }
 
-        const backendUrl = api.defaults.baseURL.replace(/\/api\/?$/, "");
+        const baseURL = api.defaults.baseURL || "";
+        const backendUrl = baseURL.replace(/\/api\/?$/, "");
 
         return `${backendUrl}/${imageUrl.replace(/^\/+/, "")}`;
     };
-    const FALLBACK_IMAGE =
-    "/images/gettyimages-1756562035-612x612.jpg";
 
-    const handleImageError = (e) => {
-        const img = e.currentTarget;
-
-        // Prevent infinite fallback attempts
-        if (img.dataset.fallbackApplied === "true") {
-            return;
-        }
-
-        img.dataset.fallbackApplied = "true";
-        img.src = FALLBACK_IMAGE;
-    };
-    // Load existing home page data
+    // Load home page data.
     const loadHome = async () => {
         try {
             setLoading(true);
@@ -57,6 +47,7 @@ function AdminFrontendHome() {
             setHome(response.data);
         } catch (err) {
             console.error("Load home error:", err);
+
             setError(
                 err.response?.data?.detail ||
                 "Failed to load home data."
@@ -68,9 +59,21 @@ function AdminFrontendHome() {
 
     useEffect(() => {
         loadHome();
+
+        return () => {
+            if (heroImagePreview) {
+                URL.revokeObjectURL(heroImagePreview);
+            }
+
+            if (aboutImagePreview) {
+                URL.revokeObjectURL(aboutImagePreview);
+            }
+        };
+        // Load once when the component mounts.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Text input change
+    // Update text fields.
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -78,16 +81,19 @@ function AdminFrontendHome() {
             ...previous,
             [name]: value,
         }));
+
+        setMessage("");
+        setError("");
     };
 
-    // Validate image
+    // Validate selected image.
     const validateImage = (file) => {
         if (!file.type.startsWith("image/")) {
             setError("Please select a valid image file.");
             return false;
         }
 
-        if (file.size > 5 * 1024 * 1024) {
+        if (file.size > MAX_IMAGE_SIZE) {
             setError("Image size must be less than 5 MB.");
             return false;
         }
@@ -95,9 +101,10 @@ function AdminFrontendHome() {
         return true;
     };
 
-    // Hero image selection
+    // Select hero image.
     const handleHeroImageChange = (e) => {
         const file = e.target.files?.[0];
+
         if (!file) return;
 
         if (!validateImage(file)) {
@@ -115,9 +122,10 @@ function AdminFrontendHome() {
         setMessage("");
     };
 
-    // About image selection
+    // Select about image.
     const handleAboutImageChange = (e) => {
         const file = e.target.files?.[0];
+
         if (!file) return;
 
         if (!validateImage(file)) {
@@ -135,9 +143,39 @@ function AdminFrontendHome() {
         setMessage("");
     };
 
-    // Save home page data and images
+    // Display placeholder when the image cannot be loaded.
+    const handleImageError = (e) => {
+        const img = e.currentTarget;
+
+        img.style.display = "none";
+
+        const placeholder =
+            img.parentElement?.querySelector(".image-placeholder");
+
+        if (placeholder) {
+            placeholder.style.display = "flex";
+        }
+    };
+
+    // Display image and hide placeholder when image loads.
+    const handleImageLoad = (e) => {
+        const img = e.currentTarget;
+
+        img.style.display = "block";
+
+        const placeholder =
+            img.parentElement?.querySelector(".image-placeholder");
+
+        if (placeholder) {
+            placeholder.style.display = "none";
+        }
+    };
+
+    // Save text and selected images.
     const handleSave = async (e) => {
         e.preventDefault();
+
+        if (!home) return;
 
         try {
             setSaving(true);
@@ -147,7 +185,6 @@ function AdminFrontendHome() {
             const payload = new FormData();
 
             const data = {
-                // HERO
                 hero_small_title: home.hero_small_title,
                 hero_title: home.hero_title,
                 hero_description: home.hero_description,
@@ -156,7 +193,6 @@ function AdminFrontendHome() {
                 hero_button_2_text: home.hero_button_2_text,
                 hero_button_2_link: home.hero_button_2_link,
 
-                // ABOUT
                 about_label: home.about_label,
                 about_title: home.about_title,
                 about_description_1: home.about_description_1,
@@ -169,7 +205,6 @@ function AdminFrontendHome() {
                 }
             });
 
-            // Upload only if a new image was selected
             if (heroImageFile) {
                 payload.append("hero_image", heroImageFile);
             }
@@ -177,23 +212,11 @@ function AdminFrontendHome() {
             if (aboutImageFile) {
                 payload.append("about_image", aboutImageFile);
             }
-            console.log("Hero image:", heroImageFile);
-            console.log("About image:", aboutImageFile);
 
-            for (const [key, value] of payload.entries()) {
-                console.log(
-                    key,
-                    value instanceof File
-                        ? `${value.name} (${value.size} bytes)`
-                        : value
-                );
-            }
             const response = await api.patch(
                 "admin/home/",
                 payload
             );
-            console.log("Saved home response:", response.data);
-
 
             setHome(response.data);
 
@@ -211,7 +234,6 @@ function AdminFrontendHome() {
             setHeroImagePreview("");
             setAboutImagePreview("");
 
-            // Clear file input controls
             const heroInput = document.getElementById("hero_image");
             const aboutInput = document.getElementById("about_image");
 
@@ -220,29 +242,94 @@ function AdminFrontendHome() {
 
             setMessage("Home page updated successfully.");
         } catch (err) {
-            console.error("Save home error:", err.response?.data || err);
+            console.error(
+                "Save home error:",
+                err.response?.data || err
+            );
 
             const details = err.response?.data;
 
-            setError(
-                typeof details === "object"
-                    ? Object.entries(details)
-                        .map(([key, value]) =>
-                            `${key}: ${
-                                Array.isArray(value)
-                                    ? value.join(", ")
-                                    : typeof value === "string"
-                                        ? value
-                                        : JSON.stringify(value)
-                            }`
-                        )
+            if (details && typeof details === "object") {
+                setError(
+                    Object.entries(details)
+                        .map(([key, value]) => {
+                            const detail = Array.isArray(value)
+                                ? value.join(", ")
+                                : typeof value === "string"
+                                    ? value
+                                    : JSON.stringify(value);
+
+                            return `${key}: ${detail}`;
+                        })
                         .join(" | ")
-                    : details || "Failed to update home data."
-            );
+                );
+            } else {
+                setError(
+                    details || "Failed to update home data."
+                );
+            }
         } finally {
             setSaving(false);
         }
     };
+
+    // Reusable image preview.
+    const renderImagePreview = ({
+        title,
+        imageUrl,
+        alt,
+        inputId,
+        onImageChange,
+    }) => (
+        <div className="form-group full-width">
+            <label htmlFor={inputId}>{title}</label>
+
+            <div className="image-preview-wrapper">
+                {imageUrl && (
+                    <img
+                        key={imageUrl}
+                        className="managed-image-preview"
+                        src={getImageUrl(imageUrl)}
+                        alt={alt}
+                        onError={handleImageError}
+                        onLoad={handleImageLoad}
+                    />
+                )}
+
+                <div
+                    className="image-placeholder"
+                    style={{
+                        display: imageUrl ? "none" : "flex",
+                    }}
+                >
+                    <div className="placeholder-icon">
+                        <span aria-hidden="true">✦</span>
+                    </div>
+
+                    <h4>{title}</h4>
+
+                    <p>
+                        {imageUrl
+                            ? "Image unavailable"
+                            : "No image selected"}
+                    </p>
+
+                    <span>
+                        Select an image below to preview it
+                    </span>
+                </div>
+            </div>
+
+            <input
+                id={inputId}
+                type="file"
+                accept="image/*"
+                onChange={onImageChange}
+            />
+
+            <small>Maximum image size: 5 MB.</small>
+        </div>
+    );
 
     if (loading) {
         return (
@@ -278,11 +365,15 @@ function AdminFrontendHome() {
             </div>
 
             {message && (
-                <div className="settings-success">{message}</div>
+                <div className="settings-success">
+                    {message}
+                </div>
             )}
 
             {error && (
-                <div className="settings-error">{error}</div>
+                <div className="settings-error">
+                    {error}
+                </div>
             )}
 
             <form
@@ -397,32 +488,16 @@ function AdminFrontendHome() {
                             />
                         </div>
 
-                        {/* HERO IMAGE UPLOAD */}
-                        <div className="form-group full-width">
-                            <label htmlFor="hero_image">
-                                Hero Image
-                            </label>
-
-                         {(heroImagePreview || home.hero_image) && (
-                                <div className="hero-image-preview">
-                                    <img
-                                        src={getImageUrl(
-                                            heroImagePreview || home.hero_image
-                                        )}
-                                        alt="Hero preview"
-                                        onError={handleImageError}
-                                    />
-                                </div>
-                            )}
-                            <input
-                                id="hero_image"
-                                type="file"
-                                accept="image/*"
-                                onChange={handleHeroImageChange}
-                            />
-
-                            <small>Maximum image size: 5 MB.</small>
-                        </div>
+                        {renderImagePreview({
+                            title: "Hero Image",
+                            imageUrl:
+                                heroImagePreview ||
+                                home.hero_image ||
+                                "",
+                            alt: "Hero preview",
+                            inputId: "hero_image",
+                            onImageChange: handleHeroImageChange,
+                        })}
                     </div>
                 </div>
 
@@ -492,32 +567,16 @@ function AdminFrontendHome() {
                             />
                         </div>
 
-                        {/* ABOUT IMAGE UPLOAD */}
-                        <div className="form-group full-width">
-                            <label htmlFor="about_image">
-                                About Section Image
-                            </label>
-
-                         {(aboutImagePreview || home.about_image) && (
-                            <div className="hero-image-preview">
-                                <img
-                                    src={getImageUrl(
-                                        aboutImagePreview || home.about_image
-                                    )}
-                                    alt="About section preview"
-                                    onError={handleImageError}
-                                />
-                            </div>
-                        )}
-                            <input
-                                id="about_image"
-                                type="file"
-                                accept="image/*"
-                                onChange={handleAboutImageChange}
-                            />
-
-                            <small>Maximum image size: 5 MB.</small>
-                        </div>
+                        {renderImagePreview({
+                            title: "About Section Image",
+                            imageUrl:
+                                aboutImagePreview ||
+                                home.about_image ||
+                                "",
+                            alt: "About section preview",
+                            inputId: "about_image",
+                            onImageChange: handleAboutImageChange,
+                        })}
                     </div>
                 </div>
 
