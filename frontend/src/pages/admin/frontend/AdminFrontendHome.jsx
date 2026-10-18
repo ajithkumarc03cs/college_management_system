@@ -33,6 +33,20 @@ function AdminFrontendHome() {
 
         return `${backendUrl}/${imageUrl.replace(/^\/+/, "")}`;
     };
+    const FALLBACK_IMAGE =
+    "/images/gettyimages-1756562035-612x612.jpg";
+
+    const handleImageError = (e) => {
+        const img = e.currentTarget;
+
+        // Prevent infinite fallback attempts
+        if (img.dataset.fallbackApplied === "true") {
+            return;
+        }
+
+        img.dataset.fallbackApplied = "true";
+        img.src = FALLBACK_IMAGE;
+    };
     // Load existing home page data
     const loadHome = async () => {
         try {
@@ -389,23 +403,17 @@ function AdminFrontendHome() {
                                 Hero Image
                             </label>
 
-                            {(heroImagePreview || home.hero_image) && (
-                                    <div className="hero-image-preview">
-                                        <img
-                                            src={getImageUrl(
-                                                heroImagePreview || home.hero_image
-                                            )}
-                                            alt="Hero preview"
-                                            onError={(e) => {
-                                                console.error(
-                                                    "Hero image failed to load:",
-                                                    e.currentTarget.src
-                                                );
-                                            }}
-                                        />
-                                    </div>
-                                )}
-
+                         {(heroImagePreview || home.hero_image) && (
+                                <div className="hero-image-preview">
+                                    <img
+                                        src={getImageUrl(
+                                            heroImagePreview || home.hero_image
+                                        )}
+                                        alt="Hero preview"
+                                        onError={handleImageError}
+                                    />
+                                </div>
+                            )}
                             <input
                                 id="hero_image"
                                 type="file"
@@ -490,22 +498,17 @@ function AdminFrontendHome() {
                                 About Section Image
                             </label>
 
-                            {(aboutImagePreview || home.about_image) && (
-                                <div className="hero-image-preview">
-                                    <img
-                                        src={getImageUrl(
-                                            aboutImagePreview || home.about_image
-                                        )}
-                                        alt="About section preview"
-                                        onError={(e) => {
-                                            console.error(
-                                                "About image failed to load:",
-                                                e.currentTarget.src
-                                            );
-                                        }}
-                                    />
-                                </div>
-                            )}
+                         {(aboutImagePreview || home.about_image) && (
+                            <div className="hero-image-preview">
+                                <img
+                                    src={getImageUrl(
+                                        aboutImagePreview || home.about_image
+                                    )}
+                                    alt="About section preview"
+                                    onError={handleImageError}
+                                />
+                            </div>
+                        )}
                             <input
                                 id="about_image"
                                 type="file"
