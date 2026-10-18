@@ -5,7 +5,7 @@ from django.db.models import Q
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from academics.models import Course
+from academics.models import Course, Department, Subject
 from .models import (
     Exam,
     ExamParticipation
@@ -418,24 +418,26 @@ class StaffExamFilterOptionsView(
 
         # Academics-la irukkura ella courses-aiyum fetch pannuvom
         all_courses = Course.objects.all().order_by("name")
+        all_departments = Department.objects.all().order_by("name")
 
         courses = {
-            course.id: {
-                "id": course.id,
-                "name": course.name,
-                "code": course.code,
+            item.id: {
+                "id": item.id,
+                "name": item.name,
+                "code": item.code,
             }
-            for course in all_courses
+            for item in all_courses
         }
 
-        departments = {}
+        departments = {
+            item.id: {
+                "id": item.id,
+                "name": item.name,
+            }
+            for item in all_departments
+        }
+
         subjects = {}
-        course_departments = []
-
-        departments = {}
-
-        subjects = {}
-
         course_departments = []
 
 
