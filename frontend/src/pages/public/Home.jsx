@@ -6,17 +6,73 @@ import "./Home.css";
 
 // Convert backend image paths into complete URLs.
 const getImageUrl = (image) => {
-    if (!image || typeof image !== "string") return "";
+    if (!image || typeof image !== "string") {
+        return "";
+    }
 
-    if (/^https?:\/\//i.test(image)) return image;
+    const trimmedImage = image.trim();
+
+    if (!trimmedImage) {
+        return "";
+    }
+
+    // Absolute URLs and local preview URLs.
+    if (
+        /^(https?:\/\/|blob:|data:)/i.test(trimmedImage)
+    ) {
+        return trimmedImage;
+    }
 
     const baseURL = api.defaults.baseURL || "";
     const origin = baseURL
         .replace(/\/api\/?$/, "")
         .replace(/\/+$/, "");
 
-    return `${origin}/${image.replace(/^\/+/, "")}`;
+    return `${origin}/${trimmedImage.replace(/^\/+/, "")}`;
 };
+
+// Reusable image component with fallback placeholder.
+function SafeImage({
+    src,
+    alt,
+    className = "",
+    placeholder = "Image unavailable",
+}) {
+    const [imageFailed, setImageFailed] = useState(!src);
+
+    useEffect(() => {
+        setImageFailed(!src);
+    }, [src]);
+
+    return (
+        <div className={`safe-image-wrapper ${className}`}>
+            {src && !imageFailed && (
+                <img
+                    src={src}
+                    alt={alt}
+                    className="safe-image"
+                    onError={() => setImageFailed(true)}
+                />
+            )}
+
+            {imageFailed && (
+                <div
+                    className="safe-image-placeholder"
+                    role="img"
+                    aria-label={placeholder}
+                >
+                    <span className="safe-image-icon" aria-hidden="true">
+                        ▧
+                    </span>
+
+                    <span className="safe-image-placeholder-text">
+                        {placeholder}
+                    </span>
+                </div>
+            )}
+        </div>
+    );
+}
 
 function Home() {
     const [home, setHome] = useState(null);
@@ -54,6 +110,7 @@ function Home() {
         return (
             <div className="public-home-error">
                 <h2>{error || "Home page data not available."}</h2>
+
                 <button
                     type="button"
                     className="primary-btn"
@@ -108,23 +165,11 @@ function Home() {
                     </div>
 
                     <div className="hero-image">
-                        {home.hero_image ? (
-                            <img
-                                src={getImageUrl(home.hero_image)}
-                                alt="College Campus"
-                                className="college-hero-image"
-                                onError={(e) => {
-                                    console.error(
-                                        "Hero image failed:",
-                                        e.currentTarget.src
-                                    );
-                                }}
-                            />
-                        ) : (
-                            <div className="image-placeholder">
-                                College Banner Image
-                            </div>
-                        )}
+                        <SafeImage
+                            src={getImageUrl(home.hero_image)}
+                            alt="College Campus"
+                            placeholder="College Banner"
+                        />
                     </div>
                 </div>
             </section>
@@ -146,23 +191,11 @@ function Home() {
             <section className="about-section">
                 <div className="container two-column">
                     <div className="about-image">
-                        {home.about_image ? (
-                            <img
-                                src={getImageUrl(home.about_image)}
-                                alt="About our college"
-                                className="college-about-image"
-                                onError={(e) => {
-                                    console.error(
-                                        "About image failed:",
-                                        e.currentTarget.src
-                                    );
-                                }}
-                            />
-                        ) : (
-                            <div className="image-placeholder">
-                                College Image
-                            </div>
-                        )}
+                        <SafeImage
+                            src={getImageUrl(home.about_image)}
+                            alt="About our college"
+                            placeholder="About Our College"
+                        />
                     </div>
 
                     <div className="about-content">
@@ -188,6 +221,7 @@ function Home() {
                         <span className="section-label">
                             {home.courses_label}
                         </span>
+
                         <h2>{home.courses_title}</h2>
                         <p>{home.courses_description}</p>
                     </div>
@@ -196,14 +230,11 @@ function Home() {
                         {courses.map((course) => (
                             <div className="course-card" key={course.id}>
                                 <div className="course-image">
-                                    {course.image ? (
-                                        <img
-                                            src={getImageUrl(course.image)}
-                                            alt={course.name}
-                                        />
-                                    ) : (
-                                        <span>Course Image</span>
-                                    )}
+                                    <SafeImage
+                                        src={getImageUrl(course.image)}
+                                        alt={course.name}
+                                        placeholder="Course Image"
+                                    />
                                 </div>
 
                                 <div className="course-content">
@@ -211,8 +242,8 @@ function Home() {
                                         {course.course_type === "UG"
                                             ? "Undergraduate"
                                             : course.course_type === "PG"
-                                                ? "Postgraduate"
-                                                : course.course_type}
+                                              ? "Postgraduate"
+                                              : course.course_type}
                                     </span>
 
                                     <h3>{course.name}</h3>
@@ -241,6 +272,7 @@ function Home() {
                         <span className="section-label">
                             {home.admission_label}
                         </span>
+
                         <h2>{home.admission_title}</h2>
                         <p>{home.admission_description}</p>
                     </div>
@@ -261,6 +293,7 @@ function Home() {
                         <span className="section-label">
                             {home.offers_label}
                         </span>
+
                         <h2>{home.offers_title}</h2>
                     </div>
 
@@ -270,9 +303,13 @@ function Home() {
                                 <span className="offer-icon">
                                     {offer.icon}
                                 </span>
+
                                 <h3>{offer.title}</h3>
                                 <p>{offer.description}</p>
-                                <Link to="/admissions">Learn More →</Link>
+
+                                <Link to="/admissions">
+                                    Learn More →
+                                </Link>
                             </div>
                         ))}
                     </div>
@@ -286,6 +323,7 @@ function Home() {
                         <span className="section-label">
                             {home.departments_label}
                         </span>
+
                         <h2>{home.departments_title}</h2>
                     </div>
 
@@ -317,6 +355,7 @@ function Home() {
                         <span className="section-label">
                             {home.why_label}
                         </span>
+
                         <h2>{home.why_title}</h2>
                     </div>
 
@@ -339,22 +378,23 @@ function Home() {
                         <span className="section-label">
                             {home.facilities_label}
                         </span>
+
                         <h2>{home.facilities_title}</h2>
                     </div>
 
                     <div className="facility-grid">
                         {facilities.map((facility) => (
                             <div className="facility-card" key={facility.id}>
-                                <div className="image-placeholder">
-                                    {facility.image ? (
-                                        <img
-                                            src={getImageUrl(facility.image)}
-                                            alt={facility.title}
-                                        />
-                                    ) : (
-                                        facility.title
-                                    )}
+                                <div className="facility-image">
+                                    <SafeImage
+                                        src={getImageUrl(facility.image)}
+                                        alt={facility.title}
+                                        placeholder={
+                                            facility.title || "Facility Image"
+                                        }
+                                    />
                                 </div>
+
                                 <h3>{facility.title}</h3>
                             </div>
                         ))}
@@ -369,6 +409,7 @@ function Home() {
                         <span className="section-label">
                             {home.events_label}
                         </span>
+
                         <h2>{home.events_title}</h2>
                     </div>
 
@@ -376,14 +417,11 @@ function Home() {
                         {events.map((event) => (
                             <div className="event-card" key={event.id}>
                                 <div className="event-image">
-                                    {event.image ? (
-                                        <img
-                                            src={getImageUrl(event.image)}
-                                            alt={event.title}
-                                        />
-                                    ) : (
-                                        "Event Image"
-                                    )}
+                                    <SafeImage
+                                        src={getImageUrl(event.image)}
+                                        alt={event.title}
+                                        placeholder="Event Image"
+                                    />
                                 </div>
 
                                 <div className="event-content">
@@ -404,6 +442,7 @@ function Home() {
                         <span className="section-label">
                             {home.notices_label}
                         </span>
+
                         <h2>{home.notices_title}</h2>
                     </div>
 
@@ -412,7 +451,10 @@ function Home() {
                             <div className="news-item" key={notice.id}>
                                 <span>{notice.date}</span>
                                 <h3>{notice.title}</h3>
-                                <Link to="/notices">Read More →</Link>
+
+                                <Link to="/notices">
+                                    Read More →
+                                </Link>
                             </div>
                         ))}
                     </div>
@@ -426,6 +468,7 @@ function Home() {
                         <span className="section-label">
                             {home.placement_label}
                         </span>
+
                         <h2>{home.placement_title}</h2>
                         <p>{home.placement_description}</p>
                     </div>
@@ -446,20 +489,18 @@ function Home() {
                         <span className="section-label">
                             {home.gallery_label}
                         </span>
+
                         <h2>{home.gallery_title}</h2>
                     </div>
 
                     <div className="gallery-grid">
                         {gallery.map((item) => (
                             <div className="gallery-image" key={item.id}>
-                                {item.image ? (
-                                    <img
-                                        src={getImageUrl(item.image)}
-                                        alt="College Gallery"
-                                    />
-                                ) : (
-                                    "Gallery Image"
-                                )}
+                                <SafeImage
+                                    src={getImageUrl(item.image)}
+                                    alt="College Gallery"
+                                    placeholder="Gallery Image"
+                                />
                             </div>
                         ))}
                     </div>
@@ -479,6 +520,7 @@ function Home() {
                         <span className="section-label">
                             {home.testimonial_label}
                         </span>
+
                         <h2>{home.testimonial_title}</h2>
                     </div>
 
@@ -504,6 +546,7 @@ function Home() {
                         <span className="section-label">
                             {home.contact_label}
                         </span>
+
                         <h2>{home.contact_title}</h2>
                         <p>{home.contact_description}</p>
 
@@ -523,21 +566,25 @@ function Home() {
                             placeholder="Your Name"
                             aria-label="Your Name"
                         />
+
                         <input
                             type="email"
                             placeholder="Your Email"
                             aria-label="Your Email"
                         />
+
                         <input
                             type="text"
                             placeholder="Phone"
                             aria-label="Phone"
                         />
+
                         <textarea
                             rows="5"
                             placeholder="Your Message"
                             aria-label="Your Message"
                         />
+
                         <button type="submit" className="primary-btn">
                             Send Message
                         </button>
