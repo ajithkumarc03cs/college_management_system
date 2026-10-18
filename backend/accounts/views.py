@@ -3374,24 +3374,67 @@ class AdminWebsiteMenuDetailView(
 
 
 
-class PublicHomeView(APIView):
+# class PublicHomeView(APIView):
 
+#     authentication_classes = []
+#     permission_classes = [AllowAny]
+
+#     def get(self, request):
+
+#         home, created = HomePage.objects.get_or_create(
+#             pk=1
+#         )
+
+#         serializer = HomePageSerializer(home)
+
+#         return Response(serializer.data)
+
+
+
+
+
+class PublicHomeView(APIView):
     authentication_classes = []
     permission_classes = [AllowAny]
 
     def get(self, request):
+        home, _ = HomePage.objects.get_or_create(pk=1)
 
-        home, created = HomePage.objects.get_or_create(
-            pk=1
+        serializer = HomePageSerializer(
+            home,
+            context={"request": request}
         )
-
-        serializer = HomePageSerializer(home)
 
         return Response(serializer.data)
 
 
+class AdminHomeView(APIView):
+    permission_classes = [IsAuthenticated, IsAdmin]
 
+    def get(self, request):
+        home, _ = HomePage.objects.get_or_create(pk=1)
 
+        serializer = HomePageSerializer(
+            home,
+            context={"request": request}
+        )
+
+        return Response(serializer.data)
+
+    def patch(self, request):
+        home, _ = HomePage.objects.get_or_create(pk=1)
+
+        serializer = HomePageSerializer(
+            home,
+            data=request.data,
+            partial=True,
+            context={"request": request}
+        )
+
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data)
 
 
 class AdminHomeView(APIView):
