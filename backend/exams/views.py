@@ -347,212 +347,92 @@ class ExamListCreateView(
 # STAFF EXAM FILTER OPTIONS
 # ============================================================
 
-class StaffExamFilterOptionsView(
-    generics.GenericAPIView
-):
+# ============================================================
+# STAFF EXAM FILTER OPTIONS
+# ============================================================
+
+class StaffExamFilterOptionsView(generics.GenericAPIView):
 
     permission_classes = [
         IsAuthenticated,
-        IsStaffOrAdmin
+        IsStaffOrAdmin,
     ]
 
-    def get(
-        self,
-        request
-    ):
+    def get(self, request):
 
-        user = request.user
+        # ----------------------------------------------------
+        # 1. GET ALL COURSES ADDED BY ADMIN
+        # ----------------------------------------------------
 
-        try:
-
-            role = user.userprofile.role.name
-
-        except Exception:
-
-            return Response({
-
-                "courses": [],
-
-                "departments": [],
-
-                "subjects": [],
-
-                "course_departments": []
-
-            })
-
-
-        # ====================================================
-        # ADMIN
-        # ====================================================
-
-        if role == "Admin":
-
-            assignments = StaffAssignment.objects.all()
-
-
-        # ====================================================
-        # STAFF
-        # ====================================================
-
-        elif role == "Staff":
-
-            assignments = StaffAssignment.objects.filter(
-                staff=user
-            )
-
-
-        else:
-
-            assignments = StaffAssignment.objects.none()
-
-
-        assignments = assignments.select_related(
-
-            "subject",
-            "subject__course",
-            "subject__department"
-
-        )
-
-
-        # Academics-la irukkura ella courses-aiyum fetch pannuvom
         all_courses = Course.objects.all().order_by("name")
-        all_departments = Department.objects.all().order_by("name")
 
-        courses = {
-            item.id: {
+        courses = [
+            {
                 "id": item.id,
                 "name": item.name,
                 "code": item.code,
             }
             for item in all_courses
-        }
+        ]
 
-        departments = {
-            item.id: {
+        # ----------------------------------------------------
+        # 2. GET ALL DEPARTMENTS ADDED BY ADMIN
+        # ----------------------------------------------------
+
+        all_departments = Department.objects.all().order_by("name")
+
+        departments = [
+            {
                 "id": item.id,
                 "name": item.name,
             }
             for item in all_departments
-        }
+        ]
 
-        subjects = {}
-        course_departments = []
+        # ----------------------------------------------------
+        # 3. GET ALL SUBJECTS ADDED BY ADMIN
+        # ----------------------------------------------------
 
+        all_subjects = (
+            Subject.objects
+            .select_related("course", "department")
+            .order_by("name")
+        )
 
-        for assignment in assignments:
-
-            subject = assignment.subject
-
-            course = subject.course
-
-            department = subject.department
-
-
-            # =================================================
-            # SUBJECT
-            # =================================================
-
-            subjects[subject.id] = {
-
-                "id":
-                    subject.id,
-
-                "name":
-                    subject.name,
-
-                "code":
-                    subject.code,
-
-                "year":
-                    subject.year,
-
-                "course_id":
-                    course.id,
-
-                "department_id":
-                    department.id,
-
+        subjects = [
+            {
+                "id": item.id,
+                "name": item.name,
+                "code": item.code,
+                "year": item.year,
+                "course_id": item.course_id,
+                "department_id": item.department_id,
             }
+            for item in all_subjects
+        ]
 
+        # ----------------------------------------------------
+        # 4. GET COURSE-DEPARTMENT MAPPING
+        # ----------------------------------------------------
 
-            # =================================================
-            # COURSE
-            # =================================================
+        course_departments = list(
+            Subject.objects
+            .values("course_id", "department_id")
+            .distinct()
+            .order_by("course_id", "department_id")
+        )
 
-            courses[course.id] = {
-
-                "id":
-                    course.id,
-
-                "name":
-                    course.name,
-
-                "code":
-                    course.code,
-
-            }
-
-
-            # =================================================
-            # DEPARTMENT
-            # =================================================
-
-            departments[department.id] = {
-
-                "id":
-                    department.id,
-
-                "name":
-                    department.name,
-
-            }
-
-
-            # =================================================
-            # COURSE → DEPARTMENT
-            # =================================================
-
-            pair = {
-
-                "course_id":
-                    course.id,
-
-                "department_id":
-                    department.id,
-
-            }
-
-
-            if pair not in course_departments:
-
-                course_departments.append(
-                    pair
-                )
-
+        # ----------------------------------------------------
+        # 5. RETURN RESPONSE
+        # ----------------------------------------------------
 
         return Response({
-
-            "courses":
-                list(
-                    courses.values()
-                ),
-
-            "departments":
-                list(
-                    departments.values()
-                ),
-
-            "subjects":
-                list(
-                    subjects.values()
-                ),
-
-            "course_departments":
-                course_departments
-
+            "courses": courses,
+            "departments": departments,
+            "subjects": subjects,
+            "course_departments": course_departments,
         })
+
 
 
 # ============================================================
