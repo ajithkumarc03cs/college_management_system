@@ -3960,57 +3960,68 @@ class AdminWebsiteDepartmentDetailView(
 # PUBLIC WEBSITE DEPARTMENTS
 # ============================================================
 
-class PublicDepartmentsView(APIView):
+# class PublicDepartmentsView(APIView):
 
+#     authentication_classes = []
+
+#     permission_classes = [
+#         AllowAny
+#     ]
+
+#     def get(self, request):
+
+#         page, created = (
+#             WebsiteDepartmentsPage.objects.get_or_create(
+#                 pk=1
+#             )
+#         )
+
+#         departments = (
+#             WebsiteDepartment.objects
+#             .filter(
+#                 is_active=True
+#             )
+#             .order_by(
+#                 "order",
+#                 "id"
+#             )
+#         )
+
+#         page_serializer = (
+#             WebsiteDepartmentsPageSerializer(
+#                 page
+#             )
+#         )
+
+#         department_serializer = (
+#             WebsiteDepartmentSerializer(
+#                 departments,
+#                 many=True
+#             )
+#         )
+
+#         return Response({
+
+#             "page": page_serializer.data,
+
+#             "departments":
+#                 department_serializer.data,
+
+#         })
+
+
+class PublicDepartmentsView(generics.ListAPIView):
     authentication_classes = []
+    permission_classes = [AllowAny]
 
-    permission_classes = [
-        AllowAny
-    ]
+    serializer_class = WebsiteDepartmentSerializer
 
-    def get(self, request):
-
-        page, created = (
-            WebsiteDepartmentsPage.objects.get_or_create(
-                pk=1
-            )
-        )
-
-        departments = (
+    def get_queryset(self):
+        return (
             WebsiteDepartment.objects
-            .filter(
-                is_active=True
-            )
-            .order_by(
-                "order",
-                "id"
-            )
+            .filter(is_active=True)
+            .order_by("order", "id")
         )
-
-        page_serializer = (
-            WebsiteDepartmentsPageSerializer(
-                page
-            )
-        )
-
-        department_serializer = (
-            WebsiteDepartmentSerializer(
-                departments,
-                many=True
-            )
-        )
-
-        return Response({
-
-            "page": page_serializer.data,
-
-            "departments":
-                department_serializer.data,
-
-        })
-
-
-
 
 
 
