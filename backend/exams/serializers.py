@@ -369,25 +369,34 @@ class ExamSerializer(
             })
 
 
+
+        # =================================================
+        # ROLE-BASED SECURITY
+        # =================================================
+
         if role == "Staff":
+            # Staff can create exams for subjects belonging
+            # to the selected course and department.
+            # Course, department and subject matching has
+            # already been validated above.
 
-            assigned = StaffAssignment.objects.filter(
+            allowed = (
+                subject.course_id == course.id
+                and subject.department_id == department.id
+            )
 
-                staff=user,
-
-                subject=subject
-
-            ).exists()
-
-
-            if not assigned:
-
+            if not allowed:
                 raise serializers.ValidationError({
-
-                    "subject":
-                    "This subject is not assigned to you."
-
+                    "subject": (
+                        "This subject does not belong to "
+                        "the selected course and department."
+                    )
                 })
+
+        elif role != "Admin":
+            raise serializers.ValidationError({
+                "user": "You are not allowed to create exams."
+            })
 
 
         return attrs
