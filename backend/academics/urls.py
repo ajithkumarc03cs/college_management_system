@@ -110,11 +110,11 @@ urlpatterns = [
     # WEBSITE DEPARTMENTS
     # ============================================================
 
-    # path(
-    #     "public/departments/",
-    #     PublicDepartmentsView.as_view(),
-    #     name="public-departments"
-    # ),
+    path(
+        "public/departments/",
+        PublicDepartmentsView.as_view(),
+        name="public-departments"
+    ),
 
     # path(
     #     "admin/departments/",
