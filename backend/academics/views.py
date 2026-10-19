@@ -46,19 +46,14 @@ class PublicReadAdminWritePermission(BasePermission):
 # COURSE LEVEL
 # ============================================================
 
-class CourseLevelListCreateView(
-    generics.ListCreateAPIView
-):
+class CourseLevelListCreateView(generics.ListCreateAPIView):
     queryset = CourseLevel.objects.all().order_by("name")
-
     serializer_class = CourseLevelSerializer
 
     permission_classes = [
-        IsAuthenticated,
-        IsAdmin
+        PublicReadAdminWritePermission
     ]
-
-
+    
 class CourseLevelDetailView(
     generics.RetrieveUpdateDestroyAPIView
 ):
