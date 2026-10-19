@@ -53,7 +53,7 @@ class CourseLevelListCreateView(generics.ListCreateAPIView):
     permission_classes = [
         PublicReadAdminWritePermission
     ]
-    
+
 class CourseLevelDetailView(
     generics.RetrieveUpdateDestroyAPIView
 ):
@@ -144,9 +144,9 @@ class DepartmentListCreateView(
 ):
     serializer_class = DepartmentSerializer
 
+  
     permission_classes = [
-        IsAuthenticated,
-        IsAdmin
+        PublicReadAdminWritePermission
     ]
 
     def get_queryset(self):
