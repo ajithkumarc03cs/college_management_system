@@ -1,6 +1,11 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-
+# from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import (
+    IsAuthenticated,
+    AllowAny,
+    SAFE_METHODS,
+    BasePermission,
+)
 from .models import (
     CourseLevel,
     Course,
@@ -59,11 +64,13 @@ class CourseListCreateView(
 ):
     serializer_class = CourseSerializer
 
+    # permission_classes = [
+    #     IsAuthenticated,
+    #     IsAdmin
+    # ]
     permission_classes = [
-        IsAuthenticated,
-        IsAdmin
+        PublicReadAdminWritePermission
     ]
-
     def get_queryset(self):
 
         queryset = Course.objects.select_related(
@@ -370,3 +377,19 @@ class HODSubjectDetailView(
             "course",
             "department"
         )
+
+
+    class PublicReadAdminWritePermission(BasePermission):
+
+        def has_permission(self, request, view):
+
+            # Public users can GET, HEAD, OPTIONS
+            if request.method in SAFE_METHODS:
+                return True
+
+            # Other methods require admin login
+            return (
+                request.user
+                and request.user.is_authenticated
+                and IsAdmin().has_permission(request, view)
+            )
