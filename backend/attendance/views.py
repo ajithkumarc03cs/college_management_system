@@ -50,143 +50,58 @@ def get_staff_subject_ids(user):
 # STAFF ATTENDANCE CLASSES
 # ============================================================
 
-class StaffAttendanceClassView(
-    generics.ListAPIView
-):
-
-    permission_classes = [
-        IsAuthenticated,
-        IsStaffOrAdmin
-    ]
+class StaffAttendanceClassView(APIView):
+    permission_classes = [IsAuthenticated, IsStaffOrAdmin]
 
     def get(self, request):
-
         user = request.user
 
-        try:
+        subjects = Subject.objects.select_related(
+            "course",
+            "department"
+        )
 
-            role = user.userprofile.role.name
+        if user.userprofile.role.name == "Staff":
+            department_id = user.userprofile.department_id
 
-        except Exception:
+            if not department_id:
+                return Response([])
 
-            return Response(
-                {
-                    "detail":
-                    "User profile not found."
-                },
-                status=status.HTTP_403_FORBIDDEN
+            subjects = subjects.filter(
+                department_id=department_id
             )
 
+        grouped = {}
 
-        # ====================================================
-        # ADMIN
-        # ====================================================
-
-        if role == "Admin":
-
-            subjects = Subject.objects.select_related(
-                "course",
-                "department"
-            )
-
-
-        # ====================================================
-        # STAFF
-        # ====================================================
-
-        elif role == "Staff":
-
-            subject_ids = get_staff_subject_ids(
-                user
-            )
-
-            subjects = Subject.objects.filter(
-                id__in=subject_ids
-            ).select_related(
-                "course",
-                "department"
-            )
-
-
-        else:
-
-            return Response(
-                {
-                    "detail":
-                    "You do not have permission."
-                },
-                status=status.HTTP_403_FORBIDDEN
-            )
-
-
-        # ====================================================
-        # CREATE UNIQUE CLASS LIST
-        # ====================================================
-
-        classes = {}
-
-
-        for subject in subjects:
-
+        for subject in subjects.order_by(
+            "course__name",
+            "department__name",
+            "year",
+            "name"
+        ):
             key = (
                 subject.course_id,
                 subject.department_id,
                 subject.year
             )
 
-
-            # ------------------------------------------------
-            # CREATE CLASS
-            # ------------------------------------------------
-
-            if key not in classes:
-
-                classes[key] = {
-
-                    "course":
-                        subject.course_id,
-
-                    "course_name":
-                        subject.course.name,
-
-                    "department":
-                        subject.department_id,
-
-                    "department_name":
-                        subject.department.name,
-
-                    "year":
-                        subject.year,
-
+            if key not in grouped:
+                grouped[key] = {
+                    "course": subject.course_id,
+                    "course_name": subject.course.name,
+                    "department": subject.department_id,
+                    "department_name": subject.department.name,
+                    "year": subject.year,
                     "subjects": []
-
                 }
 
-
-            # ------------------------------------------------
-            # STAFF TEACHING SUBJECT
-            # ------------------------------------------------
-
-            classes[key]["subjects"].append({
-
-                "id":
-                    subject.id,
-
-                "name":
-                    subject.name,
-
-                "code":
-                    subject.code
-
+            grouped[key]["subjects"].append({
+                "id": subject.id,
+                "name": subject.name,
+                "code": subject.code
             })
 
-
-        return Response(
-            list(classes.values())
-        )
-
-
-# ============================================================
+        return Response(list(grouped.values()))# ============================================================
 # ATTENDANCE LIST
 # ============================================================
 

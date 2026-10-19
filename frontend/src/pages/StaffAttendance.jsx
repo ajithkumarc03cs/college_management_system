@@ -1198,6 +1198,7 @@
 
 
 // export default StaffAttendance;
+
 import { useEffect, useMemo, useState } from "react";
 import api from "../api/axios";
 
@@ -1298,17 +1299,14 @@ function StaffAttendance() {
             setStudents([]);
             setAttendanceStatus({});
 
-            const response = await api.get(
-                "students/",
-                {
-                    params: {
-                        course: courseId,
-                        department: departmentId,
-                        year: year,
-                        page_size: 100
-                    }
-                }
-            );
+            const response = await api.get("students/", {
+                params: {
+                    course: courseId,
+                    department: departmentId,
+                    year: year,
+                    page_size: 100,
+                },
+            });
 
             console.log(
                 "Attendance Students:",
@@ -1535,15 +1533,13 @@ function StaffAttendance() {
         // ----------------------------------------------------
 
         const payload = {
-            subject:
-                Number(selectedSubject),
-
-            date:
-                attendanceDate,
-
-            records
+            subject: Number(selectedSubject),
+            date: attendanceDate,
+            records: students.map((student) => ({
+                student: student.id,
+                status: attendanceStatus[student.id] || "PRESENT",
+            })),
         };
-
         console.log(
             "Attendance Payload:",
             payload
