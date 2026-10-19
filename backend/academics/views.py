@@ -25,6 +25,23 @@ from .serializers import (
 from accounts.permissions import IsHOD
 
 
+
+
+class PublicReadAdminWritePermission(BasePermission):
+
+        def has_permission(self, request, view):
+
+            # Public users can GET, HEAD, OPTIONS
+            if request.method in SAFE_METHODS:
+                return True
+
+            # Other methods require admin login
+            return (
+                request.user
+                and request.user.is_authenticated
+                and IsAdmin().has_permission(request, view)
+            )
+
 # ============================================================
 # COURSE LEVEL
 # ============================================================
@@ -378,18 +395,3 @@ class HODSubjectDetailView(
             "department"
         )
 
-
-    class PublicReadAdminWritePermission(BasePermission):
-
-        def has_permission(self, request, view):
-
-            # Public users can GET, HEAD, OPTIONS
-            if request.method in SAFE_METHODS:
-                return True
-
-            # Other methods require admin login
-            return (
-                request.user
-                and request.user.is_authenticated
-                and IsAdmin().has_permission(request, view)
-            )
