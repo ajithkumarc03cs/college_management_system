@@ -270,78 +270,32 @@ class ExamListCreateView(
     # CREATE EXAM
     # ========================================================
 
-    @transaction.atomic
-    def perform_create(
-        self,
-        serializer
-    ):
+@transaction.atomic
+def perform_create(self, serializer):
+    exam = serializer.save(created_by=self.request.user)
 
-        exam = serializer.save(
-            created_by=self.request.user
-        )
+    students = Student.objects.filter(
+        course=exam.course,
+        department=exam.department,
+    )
 
+    eligible_students = [
+        student
+        for student in students
+        if student.get_current_year() == exam.year
+    ]
 
-        # ====================================================
-        # FIND ELIGIBLE STUDENTS
-        # ====================================================
-
-        students = Student.objects.filter(
-
-            course=exam.course,
-
-            department=exam.department
-
-        )
-
-
-        # ====================================================
-        # CREATE PARTICIPATION OBJECTS
-        # ====================================================
-
-        participation_objects = []
-
-
-        for student in students:
-
-            if (
-
-                student.get_current_year()
-
-                ==
-
-                exam.year
-
-            ):
-
-                participation_objects.append(
-
-                    ExamParticipation(
-
-                        exam=exam,
-
-                        student=student,
-
-                        status="PENDING"
-
-                    )
-
-                )
-
-
-        # ====================================================
-        # BULK CREATE
-        # ====================================================
-
-        if participation_objects:
-
-            ExamParticipation.objects.bulk_create(
-
-                participation_objects,
-
-                ignore_conflicts=True
-
+    ExamParticipation.objects.bulk_create(
+        [
+            ExamParticipation(
+                exam=exam,
+                student=student,
+                status="PENDING",
             )
-
+            for student in eligible_students
+        ],
+        ignore_conflicts=True,
+    )
 
 # ============================================================
 # STAFF EXAM FILTER OPTIONS
@@ -498,192 +452,92 @@ class ExamDetailView(
 # EXAM PARTICIPATION LIST
 # ============================================================
 
-class ExamParticipationListView(
-    generics.ListAPIView
-):
+class ExamParticipationListView(generics.ListAPIView):
 
     serializer_class = ExamParticipationSerializer
-
-    permission_classes = [
-        IsAuthenticated,
-        IsStaffOrAdmin
-    ]
+    permission_classes = [IsAuthenticated, IsStaffOrAdmin]
 
     def get_queryset(self):
-
         user = self.request.user
 
         try:
-
             role = user.userprofile.role.name
-
         except Exception:
-
             return ExamParticipation.objects.none()
 
-
-        # ====================================================
-        # ADMIN
-        # ====================================================
+        queryset = ExamParticipation.objects.none()
 
         if role == "Admin":
-
             queryset = ExamParticipation.objects.all()
 
-
-        # ====================================================
-        # STAFF
-        # ====================================================
-
         elif role == "Staff":
+            # Staff can see participation for exams in their department.
+            profile = user.userprofile
+            department = profile.department
 
-            subject_ids = get_staff_subject_ids(
-                user
-            )
+            if department is None:
+                return ExamParticipation.objects.none()
 
             queryset = ExamParticipation.objects.filter(
-
-                exam__subject_id__in=subject_ids
-
+                exam__department=department
             )
 
-
-        else:
-
-            return ExamParticipation.objects.none()
-
-
-        # ====================================================
-        # SELECT RELATED
-        # ====================================================
-
         queryset = queryset.select_related(
-
             "exam",
             "exam__subject",
             "exam__course",
             "exam__department",
             "student",
             "student__course",
-            "student__department"
-
+            "student__department",
         )
 
+        exam_id = self.request.query_params.get("exam")
+        if exam_id:
+            queryset = queryset.filter(exam_id=exam_id)
 
-        # ====================================================
-        # EXAM FILTER
-        # ====================================================
+        student_id = self.request.query_params.get("student")
+        if student_id:
+            queryset = queryset.filter(student_id=student_id)
 
-        exam = self.request.query_params.get(
-            "exam"
-        )
-
-        if exam:
-
-            queryset = queryset.filter(
-                exam_id=exam
-            )
-
-
-        # ====================================================
-        # STUDENT FILTER
-        # ====================================================
-
-        student = self.request.query_params.get(
-            "student"
-        )
-
-        if student:
-
-            queryset = queryset.filter(
-                student_id=student
-            )
-
-
-        # ====================================================
-        # STATUS FILTER
-        # ====================================================
-
-        status_value = self.request.query_params.get(
-            "status"
-        )
-
+        status_value = self.request.query_params.get("status")
         if status_value:
+            queryset = queryset.filter(status=status_value.upper())
 
-            queryset = queryset.filter(
-                status=status_value.upper()
-            )
-
-
-        return queryset.order_by(
-
-            "exam__exam_date",
-
-            "student__name"
-
-        )
-
+        return queryset.order_by("student__name")
 
 # ============================================================
 # UPDATE EXAM PARTICIPATION
 # ============================================================
 
-class ExamParticipationUpdateView(
-    generics.UpdateAPIView
-):
+class ExamParticipationUpdateView(generics.UpdateAPIView):
 
     serializer_class = ExamParticipationSerializer
-
-    permission_classes = [
-        IsAuthenticated,
-        IsStaffOrAdmin
-    ]
-
-    http_method_names = [
-        "patch"
-    ]
+    permission_classes = [IsAuthenticated, IsStaffOrAdmin]
+    http_method_names = ["patch"]
 
     def get_queryset(self):
-
         user = self.request.user
 
         try:
-
             role = user.userprofile.role.name
-
         except Exception:
-
             return ExamParticipation.objects.none()
 
-
-        # ====================================================
-        # ADMIN
-        # ====================================================
-
         if role == "Admin":
-
             return ExamParticipation.objects.all()
 
-
-        # ====================================================
-        # STAFF
-        # ====================================================
-
         if role == "Staff":
+            department = user.userprofile.department
 
-            subject_ids = get_staff_subject_ids(
-                user
-            )
+            if department is None:
+                return ExamParticipation.objects.none()
 
             return ExamParticipation.objects.filter(
-
-                exam__subject_id__in=subject_ids
-
+                exam__department=department
             )
 
-
         return ExamParticipation.objects.none()
-
 
 # ============================================================
 # STUDENT EXAM LIST

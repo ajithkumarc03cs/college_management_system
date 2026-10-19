@@ -62,15 +62,13 @@ function StaffExamParticipation() {
 
             setError("");
 
-            const response = await api.get(
+          const response = await api.get(
                 `/exam-participation/?exam=${examId}`
             );
-
 
             const data = Array.isArray(response.data)
                 ? response.data
                 : response.data.results || [];
-
 
             setParticipations(data);
 
