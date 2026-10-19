@@ -6,7 +6,6 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from academics.models import Course, Department, Subject
-from accounts.models import StaffAssignment
 from .models import (
     Exam,
     ExamParticipation
@@ -420,46 +419,27 @@ class StaffExamFilterOptionsView(
         # Academics-la irukkura ella courses-aiyum fetch pannuvom
         all_courses = Course.objects.all().order_by("name")
         all_departments = Department.objects.all().order_by("name")
-        all_subjects = Subject.objects.select_related(
-            "course",
-            "department",
-        ).order_by("name")
 
-        courses = [
-            {
+        courses = {
+            item.id: {
                 "id": item.id,
                 "name": item.name,
                 "code": item.code,
             }
             for item in all_courses
-        ]
+        }
 
-        departments = [
-            {
+        departments = {
+            item.id: {
                 "id": item.id,
                 "name": item.name,
             }
             for item in all_departments
-        ]
+        }
 
-        subjects = [
-            {
-                "id": item.id,
-                "name": item.name,
-                "code": item.code,
-                "year": item.year,
-                "course_id": item.course_id,
-                "department_id": item.department_id,
-            }
-            for item in all_subjects
-        ]
+        subjects = {}
+        course_departments = []
 
-        course_departments = list(
-            Subject.objects.values(
-                "course_id",
-                "department_id",
-            ).distinct()
-        )
 
         for assignment in assignments:
 
