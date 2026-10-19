@@ -56,19 +56,46 @@ class StaffAttendanceClassView(APIView):
     def get(self, request):
         user = request.user
 
+        # Confirm the user has a profile and role.
+        profile = getattr(user, "userprofile", None)
+
+        if profile is None or profile.role is None:
+            return Response(
+                {"detail": "User profile or role is missing."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        role_name = profile.role.name.strip().lower()
+
         subjects = Subject.objects.select_related(
             "course",
-            "department"
+            "department",
         )
 
-        if user.userprofile.role.name == "Staff":
-            department_id = user.userprofile.department_id
+        # Staff can access every subject in their department.
+        if role_name == "staff":
+            department_id = profile.department_id
 
             if not department_id:
-                return Response([])
+                return Response(
+                    {
+                        "detail": (
+                            "No department is assigned to this staff account."
+                        ),
+                        "classes": [],
+                    },
+                    status=status.HTTP_200_OK,
+                )
 
             subjects = subjects.filter(
                 department_id=department_id
+            )
+
+        # Admin can see subjects across departments.
+        elif role_name != "admin":
+            return Response(
+                {"detail": "You are not allowed to view attendance classes."},
+                status=status.HTTP_403_FORBIDDEN,
             )
 
         grouped = {}
@@ -77,12 +104,12 @@ class StaffAttendanceClassView(APIView):
             "course__name",
             "department__name",
             "year",
-            "name"
+            "name",
         ):
             key = (
                 subject.course_id,
                 subject.department_id,
-                subject.year
+                subject.year,
             )
 
             if key not in grouped:
@@ -92,16 +119,19 @@ class StaffAttendanceClassView(APIView):
                     "department": subject.department_id,
                     "department_name": subject.department.name,
                     "year": subject.year,
-                    "subjects": []
+                    "subjects": [],
                 }
 
             grouped[key]["subjects"].append({
                 "id": subject.id,
                 "name": subject.name,
-                "code": subject.code
+                "code": subject.code,
             })
 
-        return Response(list(grouped.values()))# ============================================================
+        return Response(
+            list(grouped.values()),
+            status=status.HTTP_200_OK,
+        )
 # ATTENDANCE LIST
 # ============================================================
 
