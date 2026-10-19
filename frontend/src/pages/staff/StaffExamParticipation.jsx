@@ -20,24 +20,42 @@ function StaffExamParticipation() {
     // LOAD EXAMS
     // =========================================================
 
-    const loadExams = async () => {
 
+    const loadExams = async () => {
         try {
+            setError("");
 
             const response = await api.get("/exams/");
+            console.log("Exams API response:", response.data);
 
-            const data = Array.isArray(response.data)
-                ? response.data
-                : response.data.results || [];
+            const rawData = response.data;
+
+            // Handle both array and paginated responses
+            const data = Array.isArray(rawData)
+                ? rawData
+                : Array.isArray(rawData?.results)
+                    ? rawData.results
+                    : Array.isArray(rawData?.data)
+                        ? rawData.data
+                        : [];
 
             setExams(data);
 
+            if (data.length === 0) {
+                setError("No exams returned by the exams API.");
+            }
         } catch (err) {
+            console.error(
+                "Failed to load exams:",
+                err?.response?.status,
+                err?.response?.data || err.message
+            );
 
-            console.error(err);
-
-            setError("Failed to load exams.");
-
+            setExams([]);
+            setError(
+                err?.response?.data?.detail ||
+                "Failed to load exams. Please check the API URL and login."
+            );
         }
     };
 
