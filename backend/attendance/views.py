@@ -50,53 +50,59 @@ def get_staff_subject_ids(user):
 # STAFF ATTENDANCE CLASSES
 # ============================================================
 
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
+
+
 class StaffAttendanceClassView(APIView):
     permission_classes = [IsAuthenticated, IsStaffOrAdmin]
 
     def get(self, request):
         user = request.user
 
-        # Confirm the user has a profile and role.
+        # Check profile and role
         profile = getattr(user, "userprofile", None)
 
-        if profile is None or profile.role is None:
+        if not profile or not profile.role:
             return Response(
                 {"detail": "User profile or role is missing."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        role_name = profile.role.name.strip().lower()
+        role = profile.role.name.strip().lower()
 
+        # Start with subjects from the database
         subjects = Subject.objects.select_related(
             "course",
             "department",
         )
 
-        # Staff can access every subject in their department.
-        if role_name == "staff":
-            department_id = profile.department_id
+        print("ATTENDANCE DEBUG USER:", user.username)
+        print("ATTENDANCE DEBUG ROLE:", role)
+        print("ATTENDANCE DEBUG DEPARTMENT:", profile.department_id)
+        print("ATTENDANCE DEBUG ALL SUBJECTS:", Subject.objects.count())
 
-            if not department_id:
-                return Response(
-                    {
-                        "detail": (
-                            "No department is assigned to this staff account."
-                        ),
-                        "classes": [],
-                    },
-                    status=status.HTTP_200_OK,
-                )
+        # Staff: all subjects in their own department
+        if role == "staff":
+            if not profile.department_id:
+                print("ATTENDANCE DEBUG: Staff has no department")
+
+                return Response([], status=status.HTTP_200_OK)
 
             subjects = subjects.filter(
-                department_id=department_id
+                department_id=profile.department_id
             )
 
-        # Admin can see subjects across departments.
-        elif role_name != "admin":
+        # Admin: all subjects
+        elif role != "admin":
             return Response(
-                {"detail": "You are not allowed to view attendance classes."},
+                {"detail": "You are not allowed to view these classes."},
                 status=status.HTTP_403_FORBIDDEN,
             )
+
+        print("ATTENDANCE DEBUG FILTERED:", subjects.count())
 
         grouped = {}
 
@@ -128,10 +134,12 @@ class StaffAttendanceClassView(APIView):
                 "code": subject.code,
             })
 
-        return Response(
-            list(grouped.values()),
-            status=status.HTTP_200_OK,
-        )
+        result = list(grouped.values())
+
+        print("ATTENDANCE DEBUG RESULT:", result)
+
+        return Response(result, status=status.HTTP_200_OK)
+# ============================================================        
 # ATTENDANCE LIST
 # ============================================================
 
