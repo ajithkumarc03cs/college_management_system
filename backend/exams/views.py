@@ -351,6 +351,7 @@ class ExamListCreateView(
 # STAFF EXAM FILTER OPTIONS
 # ============================================================
 
+
 class StaffExamFilterOptionsView(generics.GenericAPIView):
 
     permission_classes = [
@@ -360,10 +361,7 @@ class StaffExamFilterOptionsView(generics.GenericAPIView):
 
     def get(self, request):
 
-        # ----------------------------------------------------
-        # 1. GET ALL COURSES ADDED BY ADMIN
-        # ----------------------------------------------------
-
+        # 1. All courses
         all_courses = Course.objects.all().order_by("name")
 
         courses = [
@@ -371,28 +369,24 @@ class StaffExamFilterOptionsView(generics.GenericAPIView):
                 "id": item.id,
                 "name": item.name,
                 "code": item.code,
+                "department_id": item.department_id,
             }
             for item in all_courses
         ]
 
-        # ----------------------------------------------------
-        # 2. GET ALL DEPARTMENTS ADDED BY ADMIN
-        # ----------------------------------------------------
-
+        # 2. All departments
         all_departments = Department.objects.all().order_by("name")
 
         departments = [
             {
                 "id": item.id,
                 "name": item.name,
+                "code": item.code,
             }
             for item in all_departments
         ]
 
-        # ----------------------------------------------------
-        # 3. GET ALL SUBJECTS ADDED BY ADMIN
-        # ----------------------------------------------------
-
+        # 3. All subjects
         all_subjects = (
             Subject.objects
             .select_related("course", "department")
@@ -411,28 +405,22 @@ class StaffExamFilterOptionsView(generics.GenericAPIView):
             for item in all_subjects
         ]
 
-        # ----------------------------------------------------
-        # 4. GET COURSE-DEPARTMENT MAPPING
-        # ----------------------------------------------------
+        # 4. Course-department mappings from Course model
+        course_departments = [
+            {
+                "course_id": item.id,
+                "department_id": item.department_id,
+            }
+            for item in all_courses
+        ]
 
-        course_departments = list(
-            Subject.objects
-            .values("course_id", "department_id")
-            .distinct()
-            .order_by("course_id", "department_id")
-        )
-
-        # ----------------------------------------------------
-        # 5. RETURN RESPONSE
-        # ----------------------------------------------------
-
+        # 5. Return response
         return Response({
             "courses": courses,
             "departments": departments,
             "subjects": subjects,
             "course_departments": course_departments,
         })
-
 
 
 # ============================================================

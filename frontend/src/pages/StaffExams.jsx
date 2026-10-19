@@ -1654,25 +1654,19 @@ function StaffExams() {
     // FILTER DEPARTMENTS BY COURSE
     // ========================================================
 
-    const filteredDepartments =
-        course
-            ? departments.filter(
-                  (departmentItem) =>
-                      courseDepartments.some(
-                          (pair) =>
-                              String(
-                                  pair.course_id
-                              ) ===
-                              String(course) &&
-                              String(
-                                  pair.department_id
-                              ) ===
-                              String(
-                                  departmentItem.id
-                              )
-                      )
-              )
-            : [];
+
+    const filteredDepartments = course
+        ? departments.filter(
+            (departmentItem) =>
+                courseDepartments.some(
+                    (pair) =>
+                        String(pair.course_id) ===
+                            String(course) &&
+                        String(pair.department_id) ===
+                            String(departmentItem.id)
+                )
+        )
+        : [];
 
     // ========================================================
     // FILTER SUBJECTS
