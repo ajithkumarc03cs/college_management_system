@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.db.models import Q, Count
 from django.utils import timezone
+from academics.models import Department
+from academics.serializers import PublicDepartmentSerializer
 
 from rest_framework import generics, status, serializers
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -3877,31 +3879,31 @@ class WebsiteDepartmentSerializer(serializers.ModelSerializer):
 # PUBLIC DEPARTMENTS
 # ============================================================
 
-class PublicDepartmentsView(
-    generics.ListAPIView
-):
+class PublicDepartmentsView(APIView):
 
     authentication_classes = []
+    permission_classes = [AllowAny]
 
-    permission_classes = [
-        AllowAny
-    ]
+    def get(self, request):
 
-    serializer_class = WebsiteDepartmentSerializer
-
-    def get_queryset(self):
-
-        return (
-            WebsiteDepartment.objects
-            .filter(
-                is_active=True
-            )
-            .order_by(
-                "order",
-                "id"
+        page, created = (
+            WebsiteDepartmentsPage.objects.get_or_create(
+                pk=1
             )
         )
 
+        departments = Department.objects.all().order_by("name")
+
+        return Response({
+            "page": WebsiteDepartmentsPageSerializer(
+                page
+            ).data,
+
+            "departments": PublicDepartmentSerializer(
+                departments,
+                many=True
+            ).data,
+        })
 
 # ============================================================
 # ADMIN WEBSITE DEPARTMENTS

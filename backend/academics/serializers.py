@@ -237,3 +237,31 @@ class SubjectSerializer(serializers.ModelSerializer):
 #         read_only_fields = [
 #             "id",
 #         ]
+
+
+
+
+from rest_framework import serializers
+from .models import Department
+
+
+class PublicDepartmentSerializer(serializers.ModelSerializer):
+
+    icon = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Department
+        fields = [
+            "id",
+            "name",
+            "code",
+            "icon",
+            "description",
+        ]
+
+    def get_icon(self, obj):
+        return "🎓"
+
+    def get_description(self, obj):
+        return f"Explore academic opportunities in {obj.name}."

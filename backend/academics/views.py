@@ -12,7 +12,7 @@ from .models import (
     Department,
     Subject,
 )
-
+from academics.serializers import PublicDepartmentSerializer
 from students.permissions import IsAdmin
 
 from .serializers import (
