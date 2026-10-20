@@ -1,7 +1,6 @@
 from django.contrib import admin
-
+from .models import WebsiteDepartment
 # Register your models here.
-from django.contrib import admin
 from .models import Role, UserProfile, StaffAssignment
 from django import forms
 from .models import WebsiteSettings
@@ -71,3 +70,26 @@ class StaffAssignmentAdmin(admin.ModelAdmin):
         "subject",
         "assigned_at",
     )
+
+
+
+
+
+
+
+
+
+
+@admin.register(WebsiteDepartment)
+class WebsiteDepartmentAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "id",
+        "name",
+        "is_active",
+        "order",
+    )
+
+    list_filter = ("is_active",)
+
+    search_fields = ("name",)
