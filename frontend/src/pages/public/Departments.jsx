@@ -18,94 +18,47 @@ function Departments() {
 
 
     useEffect(() => {
-
         const loadDepartments = async () => {
-
             try {
-
                 setLoading(true);
                 setError("");
 
-
-                // =================================================
-                // PAGE CONTENT
-                // =================================================
-
-                const pageResponse = await api.get(
+                // Public API: page + departments
+                const response = await api.get(
                     "public/departments/"
                 );
 
-
-                // =================================================
-                // DEPARTMENTS DATA
-                // =================================================
-
-                const departmentsResponse = await api.get(
-                    "admin/departments/"
-                );
-
-
                 console.log(
-                    "ADMIN DEPARTMENTS:",
-                    departmentsResponse.data
+                    "PUBLIC DEPARTMENTS:",
+                    response.data
                 );
 
+                // Set page content
+                setPage(response.data.page);
 
-                // =================================================
-                // SET PAGE
-                // =================================================
-
-                setPage(
-                    pageResponse.data.page
+                // Set departments list
+                setDepartments(
+                    response.data.departments || []
                 );
-
-
-                // =================================================
-                // SET DEPARTMENTS
-                // =================================================
-
-                if (Array.isArray(departmentsResponse.data)) {
-
-                    setDepartments(
-                        departmentsResponse.data
-                    );
-
-                } else {
-
-                    setDepartments(
-                        departmentsResponse.data.departments || []
-                    );
-
-                }
-
 
             } catch (err) {
-
                 console.error(
                     "Failed to load departments:",
-                    err
+                    err.response?.data || err.message
                 );
-
 
                 setError(
                     err.response?.data?.detail ||
                     "Unable to load departments."
                 );
 
-
             } finally {
-
                 setLoading(false);
-
             }
-
         };
 
-
         loadDepartments();
-
     }, []);
-
 
     // =========================================================
     // LOADING

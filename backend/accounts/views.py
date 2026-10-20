@@ -3956,7 +3956,7 @@ class AdminWebsiteDepartmentDetailView(
 
 
 
-    # ============================================================
+# ============================================================
 # PUBLIC WEBSITE DEPARTMENTS
 # ============================================================
 
@@ -4010,20 +4010,33 @@ class AdminWebsiteDepartmentDetailView(
 #         })
 
 
-class PublicDepartmentsView(generics.ListAPIView):
+class PublicDepartmentsView(APIView):
+
     authentication_classes = []
     permission_classes = [AllowAny]
 
-    serializer_class = WebsiteDepartmentSerializer
+    def get(self, request):
+        page, created = (
+            WebsiteDepartmentsPage.objects.get_or_create(
+                pk=1
+            )
+        )
 
-    def get_queryset(self):
-        return (
+        departments = (
             WebsiteDepartment.objects
             .filter(is_active=True)
             .order_by("order", "id")
         )
 
-
+        return Response({
+            "page": WebsiteDepartmentsPageSerializer(
+                page
+            ).data,
+            "departments": WebsiteDepartmentSerializer(
+                departments,
+                many=True
+            ).data,
+        })
 
 # ============================================================
 # ADMIN WEBSITE DEPARTMENTS PAGE

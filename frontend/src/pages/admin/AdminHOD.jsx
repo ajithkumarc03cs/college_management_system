@@ -2030,13 +2030,9 @@ function AdminHOD() {
                 };
 
 
-                const response =
-                    await api.post(
-                        "admin/users/",
-                        data
-                    );
+                const response = await api.post("admin/users/create/", data);
 
-
+                            
                 console.log(
                     "HOD Created:",
                     response.data
